@@ -19,6 +19,7 @@
 		F392F31C2973610F00F85FCE /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F31B2973610F00F85FCE /* CalendarView.swift */; };
 		F392F31F2973640100F85FCE /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F392F31E2973640100F85FCE /* Roboto-Bold.ttf */; };
 		F392F3212973641E00F85FCE /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F392F3202973641E00F85FCE /* Roboto-Medium.ttf */; };
+		F392F32329744BF700F85FCE /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F32229744BF700F85FCE /* CalendarCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F392F31B2973610F00F85FCE /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		F392F31E2973640100F85FCE /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		F392F3202973641E00F85FCE /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		F392F32229744BF700F85FCE /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +100,7 @@
 		F32619B129735F1A00389875 /* MainVC */ = {
 			isa = PBXGroup;
 			children = (
+				F392F32429744BFE00F85FCE /* Cells */,
 				F392F31B2973610F00F85FCE /* CalendarView.swift */,
 			);
 			path = MainVC;
@@ -155,6 +158,14 @@
 				F392F31E2973640100F85FCE /* Roboto-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F392F32429744BFE00F85FCE /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F392F32229744BF700F85FCE /* CalendarCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,6 +246,7 @@
 				F32619A029735D8600389875 /* MainViewController.swift in Sources */,
 				F392F318297360F000F85FCE /* UIView + Extension.swift in Sources */,
 				F392F314297360D500F85FCE /* UIColor + Extension.swift in Sources */,
+				F392F32329744BF700F85FCE /* CalendarCollectionViewCell.swift in Sources */,
 				F326199C29735D8600389875 /* AppDelegate.swift in Sources */,
 				F326199E29735D8600389875 /* SceneDelegate.swift in Sources */,
 			);
