@@ -4,12 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>Roboto-Bold.ttf</string>
+		<string>Roboto-Medium.ttf</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>Roboto-Bold.ttf</string>
-	<key></key>
-	<string>Roboto-Medium.ttf</string>
+	<string></string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
