@@ -10,7 +10,6 @@ import UIKit
 
 extension UIView {
     
-    
     func addShadowOnView() {
         
         layer.shadowColor = UIColor.gray.cgColor
@@ -19,6 +18,4 @@ extension UIView {
         layer.shadowOpacity = 0.7
         layer.shadowRadius = 1.0
     }
-    
-    
 }

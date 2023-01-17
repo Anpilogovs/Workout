@@ -21,7 +21,7 @@ class MainViewController: UIViewController {
     private let userNameLabel: UILabel = {
         let label = UILabel()
         label.text = "User Name"
-        label.textColor = .specialGrey
+        label.textColor = .specialDarkGreen
         label.font = .robotoMedium24()
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.5
@@ -69,7 +69,7 @@ class MainViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delaysContentTouches = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.isHidden = false
+        tableView.isHidden = true
         return tableView
         
     }()
@@ -79,7 +79,7 @@ class MainViewController: UIViewController {
         imageView.image = UIImage(named: "noTraining")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden =  true
+        imageView.isHidden =  false
       return imageView
     }()
     
@@ -119,8 +119,9 @@ class MainViewController: UIViewController {
     }
     
     @objc private func addWorkoutButtonTrapped() {
-       
-        print("addWorkoutButtonTrapped")
+       let newWorkoutViewController = NewWorkoutViewController()
+        newWorkoutViewController.modalPresentationStyle = .fullScreen
+        present(newWorkoutViewController, animated: true)
     }
 }
 
@@ -184,6 +185,7 @@ extension MainViewController {
             weatherView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             weatherView.heightAnchor.constraint(equalToConstant: 80)
         ])
+        
         NSLayoutConstraint.activate([
             workoutTodayLabel.topAnchor.constraint(equalTo: addWorkoutButton.bottomAnchor, constant: 10),
             workoutTodayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
