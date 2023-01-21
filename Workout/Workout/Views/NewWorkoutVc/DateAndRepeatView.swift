@@ -29,7 +29,7 @@ class DateAndRepeatView: UIView {
         return label
     }()
     
-    private let datePicker: UIDatePicker = {
+     let datePicker: UIDatePicker = {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.tintColor = .specialGreen
@@ -37,7 +37,7 @@ class DateAndRepeatView: UIView {
         return datePicker
     }()
     
-    private let repeatSwitches: UISwitch = {
+     let repeatSwitches: UISwitch = {
         let switches = UISwitch()
         switches.isOn = true
         switches.tintColor = .specialGreen

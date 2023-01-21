@@ -10,7 +10,7 @@ import UIKit
 
 class RepsOrTimerView: UIView {
     
-    private let setsLabel: UILabel = {
+     let setsLabel: UILabel = {
         let label = UILabel()
         label.text = "Sets"
         label.textColor = .specialBrown
@@ -19,7 +19,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let setsNumberLabel: UILabel = {
+     let setsNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
         label.textColor =  .specialBrown
@@ -37,7 +37,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let repsLabel: UILabel = {
+     let repsLabel: UILabel = {
         let label = UILabel()
         label.text = "Reps"
         label.textColor =  .specialBrown
@@ -46,7 +46,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let repsNumberLabel: UILabel = {
+     let repsNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "1"
         label.textColor =  .specialBrown
@@ -55,7 +55,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let timerLabel: UILabel = {
+     let timerLabel: UILabel = {
         let label = UILabel()
         label.text = "Timer"
         label.font = .robotoMedium20()
@@ -64,7 +64,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let timerNumberLabel: UILabel = {
+     let timerNumberLabel: UILabel = {
         let label = UILabel()
         label.text = "0 min"
         label.font = .robotoMedium20()
@@ -73,7 +73,7 @@ class RepsOrTimerView: UIView {
         return label
     }()
     
-    private let setsSlider: UISlider = {
+     let setsSlider: UISlider = {
         let slider = UISlider()
         slider.maximumValue = 1
         slider.maximumValue = 50
@@ -84,7 +84,7 @@ class RepsOrTimerView: UIView {
         return slider
     }()
     
-    private let repsSlider: UISlider = {
+     let repsSlider: UISlider = {
         let slider = UISlider()
         slider.tintColor = .specialGreen
         slider.translatesAutoresizingMaskIntoConstraints = false
@@ -92,7 +92,7 @@ class RepsOrTimerView: UIView {
         return slider
     }()
     
-    private let timerSlider: UISlider = {
+     let timerSlider: UISlider = {
         let slider = UISlider()
         slider.tintColor = .specialGreen
         slider.maximumValue = 600
@@ -101,8 +101,8 @@ class RepsOrTimerView: UIView {
         return slider
     }()
     
-    private  var setsStackView = UIStackView()
-    private  var repsStackView = UIStackView()
+    private var setsStackView = UIStackView()
+    private var repsStackView = UIStackView()
     private var timerStackView = UIStackView()
     
     
@@ -132,10 +132,10 @@ class RepsOrTimerView: UIView {
     @objc func timerSliderChanged() {
         
         let (min, sec) = { (secs: Int) -> (Int, Int) in
-            return ((secs % 3600) / 60, (secs % 3600) % 60)}(Int(timerSlider.value))
+            return (secs / 60, secs % 60)}(Int(timerSlider.value))
                     print(min,sec)
         
-        timerNumberLabel.text = (sec != 0 ? "\(min) min \(sec) sec" : "\(min) min)")
+        timerNumberLabel.text = (sec != 0 ? "\(min) min \(sec) sec" : "\(min) min")
         
         setNegative(label: repsLabel, numberLabel: repsNumberLabel, slider: repsSlider)
         setActive(label: timerLabel, numberLabel: timerNumberLabel, slider: timerSlider)

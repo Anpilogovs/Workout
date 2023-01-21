@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainViewController: UIViewController {
     
@@ -69,7 +70,7 @@ class MainViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delaysContentTouches = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.isHidden = true
+        tableView.isHidden = false
         return tableView
         
     }()
@@ -79,7 +80,7 @@ class MainViewController: UIViewController {
         imageView.image = UIImage(named: "noTraining")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.isHidden =  false
+        imageView.isHidden =  true
       return imageView
     }()
     
@@ -87,6 +88,9 @@ class MainViewController: UIViewController {
     private let weatherView = WeatherView()
     
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
+    
+    private let localRealm = try! Realm()
+    private var workoutArray: Results<WorkoutModel>! = nil
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -97,6 +101,8 @@ class MainViewController: UIViewController {
         setupViews()
         setUpContraints()
         setupDelegates()
+        getWorkouts(date: Date())
+        
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
     }
     
@@ -123,23 +129,47 @@ class MainViewController: UIViewController {
         newWorkoutViewController.modalPresentationStyle = .fullScreen
         present(newWorkoutViewController, animated: true)
     }
+    
+    private func getWorkouts(date: Date) {
+        
+        let calendar = Calendar.current
+        let component = calendar.dateComponents([.weekday], from: date)
+        guard let weekDay = component.weekday else { return }
+        print(weekDay)
+        
+        let dateStart = date
+        let dateEnd: Date = {
+            let components = DateComponents(day: 1, second: -1)
+            return Calendar.current.date(byAdding: component, to: dateStart) ?? Date()
+        }()
+        
+        let predicatRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekDay) AND  workoutRepeat = true")
+        let predicatUnrepeat = NSPredicate(format: "workoutRepeat = false AND workoutDate BETWEEN %@", [dateStart, dateEnd])
+        let compound = NSCompoundPredicate(type: .or, subpredicates: [predicatRepeat, predicatUnrepeat])
+        
+        workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
+        tableView.reloadData()
+    }
 }
 
 //MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return workoutArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
+        let model = workoutArray[indexPath.row]
+        cell.cellConfigure(model: model)
         
         return cell
     }
 }
 
 //MARK: - UITableViewDelegate
+
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
