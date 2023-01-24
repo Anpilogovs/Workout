@@ -75,7 +75,7 @@ class RepsOrTimerView: UIView {
     
      let setsSlider: UISlider = {
         let slider = UISlider()
-        slider.maximumValue = 1
+        slider.minimumValue = 0
         slider.maximumValue = 50
         slider.maximumTrackTintColor = .specialLightBrown
         slider.minimumTrackTintColor = .specialGreen
@@ -86,6 +86,8 @@ class RepsOrTimerView: UIView {
     
      let repsSlider: UISlider = {
         let slider = UISlider()
+        slider.minimumValue = 0
+        slider.maximumValue = 50
         slider.tintColor = .specialGreen
         slider.translatesAutoresizingMaskIntoConstraints = false
         slider.addTarget(self, action: #selector(repsSliderChanged), for: .valueChanged)
@@ -155,6 +157,7 @@ class RepsOrTimerView: UIView {
     }
   
     private func setupViews() {
+    
         backgroundColor = .specialLightBrown
         translatesAutoresizingMaskIntoConstraints = false
         layer.cornerRadius = 5

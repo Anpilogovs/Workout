@@ -10,6 +10,7 @@ import RealmSwift
 
 class MainViewController: UIViewController {
     
+    
     private let userPhotoImageView: UIImageView =  {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
@@ -96,6 +97,12 @@ class MainViewController: UIViewController {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -122,6 +129,8 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         view.addSubview(noWorkoutImageView)
+        
+        
     }
     
     @objc private func addWorkoutButtonTrapped() {
@@ -133,11 +142,17 @@ class MainViewController: UIViewController {
     private func getWorkouts(date: Date) {
         
         let calendar = Calendar.current
-        let component = calendar.dateComponents([.weekday], from: date)
+        let formatter = DateFormatter()
+        let component = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
         guard let weekDay = component.weekday else { return }
-        print(weekDay)
+        guard let day = component.weekday else { return }
+        guard let month = component.weekday else { return }
+        guard let year = component.weekday else { return }
         
-        let dateStart = date
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        
+       guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return }
         let dateEnd: Date = {
             let components = DateComponents(day: 1, second: -1)
             return Calendar.current.date(byAdding: component, to: dateStart) ?? Date()
@@ -151,7 +166,22 @@ class MainViewController: UIViewController {
         tableView.reloadData()
     }
 }
+//MARK: - StartWorkoutProtocol
 
+extension MainViewController: StartWorkoutProtocol {
+    func startButtonTapped(model: WorkoutModel) {
+        
+        
+        if model.workoutTimer == 0 {
+        let startWorkoutViewController = StartWorkoutViewController()
+        startWorkoutViewController.modalPresentationStyle = .fullScreen
+            startWorkoutViewController.workoutModel = model
+        present(startWorkoutViewController, animated: true)
+        } else {
+            print("time")
+        }
+    }
+}
 //MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource {
@@ -163,6 +193,7 @@ extension MainViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: idWorkoutTableViewCell, for: indexPath) as! WorkoutTableViewCell
         let model = workoutArray[indexPath.row]
         cell.cellConfigure(model: model)
+        cell.cellStartWorkoutDelegate = self
         
         return cell
     }

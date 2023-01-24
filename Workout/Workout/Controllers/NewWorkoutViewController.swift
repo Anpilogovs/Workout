@@ -57,22 +57,18 @@ class NewWorkoutViewController: UIViewController {
     }()
     
     private let saveButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
         button.setTitle("Save", for: .normal)
         button.backgroundColor = .specialGreen
         button.layer.cornerRadius = 10
+        button.titleLabel?.font = .robotoMedium16()
+        button.tintColor = .white
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(closeScrennButton),
+        button.addTarget(self, action: #selector(saveButtonTapped),
                          for: .touchUpInside)
         return button
     }()
-    
-    private let newWorkoutScrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
-    
+
     private let dateAndRepeatView = DateAndRepeatView()
     private let repsOrTimerView = RepsOrTimerView()
     
@@ -104,29 +100,17 @@ class NewWorkoutViewController: UIViewController {
     
   private func setupViews() {
       
-      view.addSubview(newWorkoutScrollView)
-      newWorkoutScrollView.addSubview(newWorkoutLabel)
-      newWorkoutScrollView.addSubview(closeButton)
-      newWorkoutScrollView.addSubview(nameLabel)
-      newWorkoutScrollView.addSubview(nameTextField)
-      newWorkoutScrollView.addSubview(dateAndRepeatlabel)
-      newWorkoutScrollView.addSubview(dateAndRepeatView)
-      newWorkoutScrollView.addSubview(repesOrTimerLabel)
-      newWorkoutScrollView.addSubview(repsOrTimerView)
-      newWorkoutScrollView.addSubview(saveButton)
+      view.addSubview(scrollView)
+      scrollView.addSubview(newWorkoutLabel)
+      scrollView.addSubview(closeButton)
+      scrollView.addSubview(nameLabel)
+      scrollView.addSubview(nameTextField)
+      scrollView.addSubview(dateAndRepeatlabel)
+      scrollView.addSubview(dateAndRepeatView)
+      scrollView.addSubview(repesOrTimerLabel)
+      scrollView.addSubview(repsOrTimerView)
+      scrollView.addSubview(saveButton)
 
-      
-      
-//      view.addSubview(newWorkoutLabel)
-//      view.addSubview(closeButton)
-//      view.addSubview(nameLabel)
-//      view.addSubview(nameTextField)
-//      view.addSubview(dateAndRepeatlabel)
-//
-//      view.addSubview(newWorkoutView)
-//      view.addSubview(repesOrTimerLabel)
-//      view.addSubview(workouView)
-//      view.addSubview(saveButton)
     }
     
     private func setupDelegate() {
@@ -143,6 +127,13 @@ class NewWorkoutViewController: UIViewController {
         view.endEditing(true)
     }
     
+    
+    @objc func saveButtonTapped() {
+        print("saveButtonTrapped")
+        setModel()
+        saveModel()
+    }
+    
     private func setModel() {
         guard let nameWorkout = nameTextField.text else { return }
         workoutModel.workoutName = nameWorkout
@@ -156,16 +147,39 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutRepeat = (dateAndRepeatView.repeatSwitches.isOn)
         
         workoutModel.workoutSets = Int(repsOrTimerView.setsSlider.value)
-        workoutModel.workoutSets = Int(repsOrTimerView.repsSlider.value)
-        workoutModel.workoutSets = Int(repsOrTimerView.timerSlider.value)
+        workoutModel.workoutReps = Int(repsOrTimerView.repsSlider.value)
+        workoutModel.workoutTimer = Int(repsOrTimerView.timerSlider.value)
         
         guard let imageData = testImage?.pngData() else { return }
         workoutModel.workoutImage = imageData
     }
     
-    
     private func saveModel() {
+        guard let text = nameTextField.text else { return }
+        let count = text.filter { $0.isNumber || $0.isLetter}.count
         
+        if count != 0 && workoutModel.workoutSets != 0 && workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0 {
+            RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            alertOk(title: "Success", message: nil)
+            //            Mandatory updating the model after preservation
+            
+            workoutModel = WorkoutModel()
+            refreshWorkoutObjects()
+        } else {
+            alertOk(title: "Error", message: "Choose all the parameters")
+        }
+    }
+    
+    private func refreshWorkoutObjects() {
+        dateAndRepeatView.datePicker.setDate(Date(), animated: true)
+        nameTextField.text = ""
+        dateAndRepeatView.repeatSwitches.isOn = true
+        repsOrTimerView.repsNumberLabel.text = "0"
+        repsOrTimerView.repsNumberLabel.text = "0"
+        repsOrTimerView.repsSlider.value = 0
+        repsOrTimerView.setsLabel.text = "0"
+        repsOrTimerView.setsNumberLabel.text = "0"
+        repsOrTimerView.setsSlider.value = 0
     }
 }
 
@@ -182,15 +196,15 @@ extension NewWorkoutViewController {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            newWorkoutScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
-            newWorkoutScrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            newWorkoutScrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
-            newWorkoutScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)])
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -0),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 0)
+        ])
         
         NSLayoutConstraint.activate([
             newWorkoutLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             newWorkoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
         ])
         
         NSLayoutConstraint.activate([
@@ -198,7 +212,6 @@ extension NewWorkoutViewController {
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             closeButton.heightAnchor.constraint(equalToConstant: 30),
             closeButton.widthAnchor.constraint(equalToConstant: 30)
-            
         ])
         
         NSLayoutConstraint.activate([
@@ -206,19 +219,18 @@ extension NewWorkoutViewController {
             nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
-        
+
         NSLayoutConstraint.activate([
             nameTextField.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 3),
             nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             nameTextField.heightAnchor.constraint(equalToConstant: 38)
         ])
-        
+
         NSLayoutConstraint.activate([
             dateAndRepeatlabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 20),
-            dateAndRepeatlabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            dateAndRepeatlabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             dateAndRepeatlabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            
         ])
 
         NSLayoutConstraint.activate([
@@ -227,27 +239,25 @@ extension NewWorkoutViewController {
             dateAndRepeatView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             dateAndRepeatView.heightAnchor.constraint(equalToConstant: 100)
         ])
-        
+
         NSLayoutConstraint.activate([
-            repesOrTimerLabel.topAnchor.constraint(equalTo: newWorkoutView.bottomAnchor, constant: 20),
+            repesOrTimerLabel.topAnchor.constraint(equalTo: dateAndRepeatView.bottomAnchor, constant: 5),
             repesOrTimerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             repesOrTimerLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
-        
         NSLayoutConstraint.activate([
             repsOrTimerView.topAnchor.constraint(equalTo: repesOrTimerLabel.bottomAnchor, constant: 3),
             repsOrTimerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             repsOrTimerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             repsOrTimerView.heightAnchor.constraint(equalToConstant: 320)
-            
         ])
-        
+
         NSLayoutConstraint.activate([
             saveButton.topAnchor.constraint(equalTo: repsOrTimerView.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.heightAnchor.constraint(equalToConstant: 55),
-            saveButton.bottomAnchor.constraint(equalTo: newWorkoutScrollView.bottomAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20),
         ])
     }
 }

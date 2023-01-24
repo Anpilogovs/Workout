@@ -60,13 +60,13 @@ class DateAndRepeatView: UIView {
     }
     
     private func setupViews() {
+        backgroundColor = .specialLightBrown
         layer.cornerRadius = 5
         translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .specialLightBrown
         
-       dateStackView =  UIStackView(arrangedSubviews: [dateLabel,datePicker],
-                                    axis: .horizontal, spacing: 10)
-       repeatStackView = UIStackView(arrangedSubviews: [repeatEveryLabel,repeatSwitches],
+        dateStackView =  UIStackView(arrangedSubviews: [dateLabel,datePicker],
+                                     axis: .horizontal, spacing: 10)
+        repeatStackView = UIStackView(arrangedSubviews: [repeatEveryLabel,repeatSwitches],
                                       axis: .horizontal, spacing: 10)
         
         addSubview(dateStackView)
