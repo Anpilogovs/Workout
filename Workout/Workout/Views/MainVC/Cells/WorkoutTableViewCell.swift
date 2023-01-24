@@ -7,17 +7,20 @@
 
 import UIKit
 
+
+protocol StartWorkoutProtocol: AnyObject {
+    func startButtonTapped(model: WorkoutModel)
+}
+
 class WorkoutTableViewCell: UITableViewCell {
-    
     
     private let backgroundCell: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 20
-        view.backgroundColor = .specialBrown
+        view.backgroundColor = .specialLightBrown
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
     
     private let workoutBackgroundView: UIView = {
         let view = UIView()
@@ -39,7 +42,6 @@ class WorkoutTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Pull Ups"
         label.textColor = .specialGrey
-        label.backgroundColor = .red
         label.font = .robotoMedium22()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -95,7 +97,6 @@ class WorkoutTableViewCell: UITableViewCell {
         backgroundColor = .clear
         selectionStyle = .none
         
-        
         addSubview(backgroundCell)
         addSubview(workoutBackgroundView)
         addSubview(workoutImageView)
@@ -117,6 +118,7 @@ class WorkoutTableViewCell: UITableViewCell {
     }
     
     func cellConfigure(model: WorkoutModel) {
+        workoutModel = model
         workoutNameLabel.text = model.workoutName
         
         let (min, sec) = { (secs: Int) -> (Int, Int) in

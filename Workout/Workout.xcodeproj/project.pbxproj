@@ -36,7 +36,6 @@
 		F392F348297D4DFF00F85FCE /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F347297D4DFF00F85FCE /* SimpleAlert.swift */; };
 		F392F34A297D99F800F85FCE /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F349297D99F800F85FCE /* StartWorkoutView.swift */; };
 		F392F34C297D9B7200F85FCE /* StartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F34B297D9B7200F85FCE /* StartWorkoutViewController.swift */; };
-		F392F34F297E982000F85FCE /* StartWorkoutProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F34E297E982000F85FCE /* StartWorkoutProtocol.swift */; };
 		F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F351297F13D300F85FCE /* OKCancelAlert.swift */; };
 /* End PBXBuildFile section */
 
@@ -70,7 +69,6 @@
 		F392F347297D4DFF00F85FCE /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
 		F392F349297D99F800F85FCE /* StartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
 		F392F34B297D9B7200F85FCE /* StartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutViewController.swift; sourceTree = "<group>"; };
-		F392F34E297E982000F85FCE /* StartWorkoutProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutProtocol.swift; sourceTree = "<group>"; };
 		F392F351297F13D300F85FCE /* OKCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKCancelAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +88,6 @@
 		F326198F29735D8600389875 = {
 			isa = PBXGroup;
 			children = (
-				F392F350297F12E900F85FCE /* Protocol */,
 				F392F34329786E1A00F85FCE /* Services */,
 				F326199A29735D8600389875 /* Workout */,
 				F326199929735D8600389875 /* Products */,
@@ -244,22 +241,6 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
-		F392F34D297E97FA00F85FCE /* StartViewController */ = {
-			isa = PBXGroup;
-			children = (
-				F392F34E297E982000F85FCE /* StartWorkoutProtocol.swift */,
-			);
-			path = StartViewController;
-			sourceTree = "<group>";
-		};
-		F392F350297F12E900F85FCE /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-				F392F34D297E97FA00F85FCE /* StartViewController */,
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,7 +324,6 @@
 				F392F316297360E500F85FCE /* UIFont + Extension.swift in Sources */,
 				F392F3352976E26B00F85FCE /* MainTabBarController.swift in Sources */,
 				F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */,
-				F392F34F297E982000F85FCE /* StartWorkoutProtocol.swift in Sources */,
 				F392F31A297360FE00F85FCE /* UIStackView + Extension.swift in Sources */,
 				F392F31C2973610F00F85FCE /* CalendarView.swift in Sources */,
 				F32619A029735D8600389875 /* MainViewController.swift in Sources */,

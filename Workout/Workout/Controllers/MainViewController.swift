@@ -10,7 +10,6 @@ import RealmSwift
 
 class MainViewController: UIViewController {
     
-    
     private let userPhotoImageView: UIImageView =  {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
@@ -73,7 +72,6 @@ class MainViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.isHidden = false
         return tableView
-        
     }()
     
     private let noWorkoutImageView: UIImageView = {
@@ -82,7 +80,7 @@ class MainViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.isHidden =  true
-      return imageView
+        return imageView
     }()
     
     private let calendarView = CalendarView()
@@ -116,6 +114,7 @@ class MainViewController: UIViewController {
     private  func setupDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        calendarView.cellCollectionViewDelegate = self
     }
     
     private func setupViews() {
@@ -129,12 +128,10 @@ class MainViewController: UIViewController {
         view.addSubview(workoutTodayLabel)
         view.addSubview(tableView)
         view.addSubview(noWorkoutImageView)
-        
-        
     }
     
     @objc private func addWorkoutButtonTrapped() {
-       let newWorkoutViewController = NewWorkoutViewController()
+        let newWorkoutViewController = NewWorkoutViewController()
         newWorkoutViewController.modalPresentationStyle = .fullScreen
         present(newWorkoutViewController, animated: true)
     }
@@ -143,22 +140,21 @@ class MainViewController: UIViewController {
         
         let calendar = Calendar.current
         let formatter = DateFormatter()
-        let component = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
-        guard let weekDay = component.weekday else { return }
-        guard let day = component.weekday else { return }
-        guard let month = component.weekday else { return }
-        guard let year = component.weekday else { return }
-        
+        let components = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
+        guard let weekDay = components.weekday else { return }
+        guard let day = components.day else { return }
+        guard let month = components.month else { return }
+        guard let year = components.year else { return }
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         
-       guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return }
+        guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return }
         let dateEnd: Date = {
             let components = DateComponents(day: 1, second: -1)
-            return Calendar.current.date(byAdding: component, to: dateStart) ?? Date()
+            return Calendar.current.date(byAdding: components, to: dateStart) ?? Date()
         }()
         
-        let predicatRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekDay) AND  workoutRepeat = true")
+        let predicatRepeat = NSPredicate(format: "workoutNumberOfDay = \(weekDay) AND workoutRepeat = true")
         let predicatUnrepeat = NSPredicate(format: "workoutRepeat = false AND workoutDate BETWEEN %@", [dateStart, dateEnd])
         let compound = NSCompoundPredicate(type: .or, subpredicates: [predicatRepeat, predicatUnrepeat])
         
@@ -169,19 +165,29 @@ class MainViewController: UIViewController {
 //MARK: - StartWorkoutProtocol
 
 extension MainViewController: StartWorkoutProtocol {
+    
     func startButtonTapped(model: WorkoutModel) {
         
-        
         if model.workoutTimer == 0 {
-        let startWorkoutViewController = StartWorkoutViewController()
-        startWorkoutViewController.modalPresentationStyle = .fullScreen
+            let startWorkoutViewController = StartWorkoutViewController()
+            startWorkoutViewController.modalPresentationStyle = .fullScreen
             startWorkoutViewController.workoutModel = model
-        present(startWorkoutViewController, animated: true)
+            present(startWorkoutViewController, animated: true)
         } else {
             print("time")
         }
     }
 }
+
+//MARK: - SelectCollectionViewItemProtocol
+
+extension MainViewController: SelectCollectionViewItemProtocol {
+    
+    func selectItem(date: Date) {
+        getWorkouts(date: date)
+    }
+}
+
 //MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource {
@@ -205,6 +211,19 @@ extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let action = UIContextualAction(style: .destructive, title: "") { _, _, _ in
+            let deleteModel = self.workoutArray[indexPath.row]
+            RealmManager.shared.deleteWorkoutModel(model: deleteModel)
+            tableView.reloadData()
+        }
+        action.backgroundColor = .specialBackgound
+        action.image = UIImage(named: "Delete")
+        
+        return UISwipeActionsConfiguration(actions: [action])
     }
 }
 

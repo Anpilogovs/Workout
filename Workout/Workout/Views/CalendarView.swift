@@ -8,9 +8,11 @@
 import Foundation
 import UIKit
 
+protocol SelectCollectionViewItemProtocol: AnyObject {
+    func selectItem(date: Date)
+}
 
 class CalendarView: UIView {
-    
     
    private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -20,8 +22,8 @@ class CalendarView: UIView {
         return collectionView
     }()
     
-   private let idCalendarCell = "idCalendarCell"
-    
+    private let idCalendarCell = "idCalendarCell"
+    weak var cellCollectionViewDelegate: SelectCollectionViewItemProtocol?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -60,12 +62,9 @@ class CalendarView: UIView {
         let calendar = Calendar.current
         let today = Date()
         
-        
         for i in -6...0 {
             let date = calendar.date(byAdding: .weekday, value: i, to: today)
-            guard let date = date else {
-                return weekArray
-            }
+            guard let date = date else { return weekArray }
             let components = calendar.dateComponents([.day], from: date)
             weekArray[1].append(String(components.day ?? 0))
             let weekDay = dateFormatter.string(from: date)
@@ -99,7 +98,22 @@ extension CalendarView: UICollectionViewDataSource {
 extension CalendarView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("hello")
+        
+        let calendar = Calendar.current
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy/MM/dd HH:mm"
+        let component = calendar.dateComponents([.month, .year], from: Date())
+        guard let month = component.month else { return }
+        guard let year = component.year else { return }
+        
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell else { return }
+        guard let numberOfDayString = cell.numberOfDayLabel.text else { return }
+        guard let numberOfDay = Int(numberOfDayString) else { return }
+        
+        guard let date = formatter.date(from: "\(year)/\(month)/\(numberOfDay) 00:00") else { return }
+        
+        cellCollectionViewDelegate?.selectItem(date: date)
     }
 }
 
@@ -108,7 +122,7 @@ extension CalendarView: UICollectionViewDelegate {
 extension CalendarView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: 34,
+        CGSize(width: collectionView.frame.width / 8,
                height: collectionView.frame.height)
     }
     

@@ -8,7 +8,6 @@
 import RealmSwift
 import Foundation
 
-
 class WorkoutModel: Object {
     @Persisted var workoutDate: Date
     @Persisted var workoutNumberOfDay: Int = 0

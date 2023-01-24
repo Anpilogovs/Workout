@@ -16,22 +16,20 @@ class RealmManager {
     let localRealm = try! Realm()
     
     func saveWorkoutModel(model: WorkoutModel) {
-        try! localRealm.write({
+        try! localRealm.write {
             localRealm.add(model)
-           
-        })
+        }
     }
     
     func updateWorkoutModel(model: WorkoutModel, bool: Bool) {
-        try! localRealm.write({
+        try! localRealm.write {
             model.status = bool
-        })
+        }
     }
     
     func deleteWorkoutModel(model: WorkoutModel) {
-        try! localRealm.write({
+        try! localRealm.write {
             localRealm.delete(model)
-
-        })
+        }
     }
 }

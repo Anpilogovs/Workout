@@ -8,9 +8,13 @@
 import Foundation
 import UIKit
 
+protocol NextSetProtocol: AnyObject {
+    func nextSetTapped()
+}
+
 class StartWorkoutView: UIView {
     
-    let workoutNameLabel: UILabel = {
+      let workoutNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Bicieps"
         label.font = .robotoMedium24()
@@ -21,7 +25,7 @@ class StartWorkoutView: UIView {
         return label
     }()
     
-    let setsLabel: UILabel = {
+    private  let setsLabel: UILabel = {
         let label = UILabel()
         label.text = "Sets"
         label.font = .robotoMedium18()
@@ -31,7 +35,7 @@ class StartWorkoutView: UIView {
         return label
     }()
     
-    let numberOfSetsLabel: UILabel = {
+     let numberOfSetsLabel: UILabel = {
         let label = UILabel()
         label.text = "1/4"
         label.textColor = .specialGrey
@@ -41,7 +45,7 @@ class StartWorkoutView: UIView {
         return label
     }()
     
-    let repsLabel: UILabel = {
+      let repsLabel: UILabel = {
         let label = UILabel()
         label.text = "Reps"
         label.font = .robotoMedium20()
@@ -51,7 +55,7 @@ class StartWorkoutView: UIView {
         return label
     }()
     
-    let numberOfRepsLabel: UILabel = {
+      let numberOfRepsLabel: UILabel = {
         let label = UILabel()
         label.text = "20"
         label.font = .robotoMedium24()
@@ -61,7 +65,21 @@ class StartWorkoutView: UIView {
         return label
     }()
     
-    let nextSetButton: UIButton = {
+    private let setsLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .specialBrown
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private let repsLineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .specialBrown
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    private  let nextSetButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("NEXT SET", for: .normal)
         button.titleLabel?.font = .robotoMedium16()
@@ -74,7 +92,7 @@ class StartWorkoutView: UIView {
         return button
     }()
     
-    let editingButton: UIButton = {
+    private  let editingButton: UIButton = {
         let button = UIButton()
         button.setTitle("Editing", for: .normal)
         button.setImage(UIImage(named: "Editing")?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -116,7 +134,9 @@ class StartWorkoutView: UIView {
        
         addSubview(workoutNameLabel)
         addSubview(setsStackView)
+        addSubview(setsLineView)
         addSubview(repsStackView)
+        addSubview(repsLineView)
         addSubview(editingButton)
         addSubview(nextSetButton)
     }
@@ -145,15 +165,30 @@ extension StartWorkoutView {
         ])
         
         NSLayoutConstraint.activate([
+            setsLineView.topAnchor.constraint(equalTo: setsStackView.bottomAnchor, constant: 5),
+            setsLineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            setsLineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            setsLineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
+        NSLayoutConstraint.activate([
             repsStackView.topAnchor.constraint(equalTo: setsStackView.bottomAnchor, constant: 25),
             repsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             repsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
         
         NSLayoutConstraint.activate([
-            editingButton.topAnchor.constraint(equalTo: repsStackView.bottomAnchor, constant: 20),
+            repsLineView.topAnchor.constraint(equalTo: repsStackView.bottomAnchor, constant: 5),
+            repsLineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            repsLineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            repsLineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+        
+        
+        NSLayoutConstraint.activate([
+            editingButton.topAnchor.constraint(equalTo: repsLineView.bottomAnchor, constant: 20),
             editingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            editingButton.widthAnchor.constraint(equalTo: widthAnchor, constant: 80),
+            editingButton.widthAnchor.constraint(equalToConstant: 80),
             editingButton.heightAnchor.constraint(equalToConstant: 10)
         ])
         
