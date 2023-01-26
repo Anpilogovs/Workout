@@ -68,28 +68,9 @@ class StartWorkoutViewController: UIViewController {
         setupContraints()
         setWorkoutParameters()
         setDelegate()
-    }
-    
-    private func setDelegate() {
-        startWorkoutView.cellNextSetDelegate = self
-    }
-    
-    @objc func closeButtonTapped() {
-        dismiss(animated: true)
-    }
-    
-    @objc func finishButtonTapped() {
         
-        if numberOfSet == workoutModel.workoutSets {
-            dismiss(animated: true)
-            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
-        } else {
-            alertOkCancel(title: "Warning", message: "You have'n finifed your workout") {
-                self.dismiss(animated: true)
-            }
-        }
+        print(workoutModel)
     }
-    
     
     private func setupViews() {
         view.backgroundColor = .specialBackgound
@@ -102,6 +83,25 @@ class StartWorkoutViewController: UIViewController {
         view.addSubview(finishButton)
     }
     
+    private func setDelegate() {
+        startWorkoutView.cellNextSetDelegate = self
+    }
+    
+    @objc func closeButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    @objc func finishButtonTapped() {
+        if numberOfSet == workoutModel.workoutSets {
+            dismiss(animated: true)
+            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
+        } else {
+            alertOkCancel(title: "Warning", message: "You have'n finifed your workout") {
+                self.dismiss(animated: true)
+            }
+        }
+    }
+
     private func setWorkoutParameters() {
         startWorkoutView.workoutNameLabel.text = workoutModel.workoutName
         startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"

@@ -88,9 +88,7 @@ class NewWorkoutViewController: UIViewController {
         setupConstraints()
         setupDelegate()
         addTaps()
-        nameTextField.becomeFirstResponder()
 
-        view.backgroundColor = .specialBackgound
     }
     
     @objc func closeScrennButton() {
@@ -100,7 +98,10 @@ class NewWorkoutViewController: UIViewController {
     
   private func setupViews() {
       
+      view.backgroundColor = .specialBackgound
+      
       view.addSubview(scrollView)
+      
       scrollView.addSubview(newWorkoutLabel)
       scrollView.addSubview(closeButton)
       scrollView.addSubview(nameLabel)
@@ -162,7 +163,6 @@ class NewWorkoutViewController: UIViewController {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
             alertOk(title: "Success", message: nil)
             //            Mandatory updating the model after preservation
-            
             workoutModel = WorkoutModel()
             refreshWorkoutObjects()
         } else {

@@ -112,7 +112,7 @@ class StartWorkoutView: UIView {
         super.init(frame: frame)
         
         setupViews()
-        setupContraints()
+//        setupContraints()
     }
     
     required init?(coder: NSCoder) {
@@ -131,7 +131,7 @@ class StartWorkoutView: UIView {
         repsStackView = UIStackView.init(arrangedSubviews: [repsLabel,numberOfRepsLabel],
                                          axis: .horizontal,
                                          spacing: 10)
-       
+
         addSubview(workoutNameLabel)
         addSubview(setsStackView)
         addSubview(setsLineView)
@@ -157,41 +157,41 @@ extension StartWorkoutView {
             workoutNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             workoutNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
-        
+
         NSLayoutConstraint.activate([
             setsStackView.topAnchor.constraint(equalTo: workoutNameLabel.bottomAnchor, constant: 25),
             setsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             setsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
-        
+
         NSLayoutConstraint.activate([
             setsLineView.topAnchor.constraint(equalTo: setsStackView.bottomAnchor, constant: 5),
             setsLineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             setsLineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             setsLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-        
+
         NSLayoutConstraint.activate([
             repsStackView.topAnchor.constraint(equalTo: setsStackView.bottomAnchor, constant: 25),
             repsStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             repsStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
-        
+
         NSLayoutConstraint.activate([
             repsLineView.topAnchor.constraint(equalTo: repsStackView.bottomAnchor, constant: 5),
             repsLineView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
             repsLineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             repsLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-        
-        
+
+
         NSLayoutConstraint.activate([
             editingButton.topAnchor.constraint(equalTo: repsLineView.bottomAnchor, constant: 20),
             editingButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             editingButton.widthAnchor.constraint(equalToConstant: 80),
             editingButton.heightAnchor.constraint(equalToConstant: 10)
         ])
-        
+
         NSLayoutConstraint.activate([
             nextSetButton.topAnchor.constraint(equalTo: editingButton.bottomAnchor, constant: 20),
             nextSetButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
