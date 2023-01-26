@@ -9,20 +9,21 @@ import Foundation
 import UIKit
 
 
-class TimerStartViewController: UIViewController {
+class TimerStartWorkoutViewController: UIViewController {
     
-    let nameLabel: UILabel = {
+    let startWorkoutLabel: UILabel = {
         let label = UILabel()
         label.text = "START WORKOUT"
-        label.font = .robotoMedium22()
+        label.font = .robotoMedium24()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let closeButton: UIButton = {
+    let closeScreenButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Close"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(closeScreenButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -48,20 +49,23 @@ class TimerStartViewController: UIViewController {
     
     let finishButton: UIButton = {
         let button = UIButton()
+        button.setTitle("FINISH", for: .normal)
         button.tintColor = .white
         button.backgroundColor = .specialDarkGreen
-        button.setTitle("FINISH", for: .normal)
         button.layer.cornerRadius = 10
+        button.titleLabel?.font = .robotoMedium16()
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     let timerWorkoutView = TimerStartView()
+    var timerWorkoutModel = WorkoutModel()
     
+    private var numberOfSet = 1
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        closeButton.layer.cornerRadius = closeButton.frame.width / 2
+        closeScreenButton.layer.cornerRadius = closeScreenButton.frame.width / 2
     }
     
     override func viewDidLoad() {
@@ -70,42 +74,75 @@ class TimerStartViewController: UIViewController {
         
         setupViews()
         setupContraints()
+        setDelegate()
     }
     
     private func setupViews() {
         
         view.backgroundColor = .specialBackgound
         
-        view.addSubview(nameLabel)
-        view.addSubview(closeButton)
+        view.addSubview(startWorkoutLabel)
+        view.addSubview(closeScreenButton)
         view.addSubview(timerImageView)
         timerImageView.addSubview(timerNumberLabel)
-        view.addSubview(timerWorkoutView)
         view.addSubview(detailLabel)
+        view.addSubview(timerWorkoutView)
         view.addSubview(finishButton)
+        
+        setupWorkoutParametersForScreenWithTimer()
+        
+    }
+
+    private func setDelegate() {
+        timerWorkoutView.nextSetDelegate = self
+    }
+
+    @objc func closeScreenButtonTapped() {
+        dismiss(animated: true)
+    }
+    
+    private func setupWorkoutParametersForScreenWithTimer() {
+        timerWorkoutView.nameLabel.text = timerWorkoutModel.workoutName
+        timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(timerWorkoutModel.workoutSets)"
+        timerWorkoutView.timeOfSetNumberLabel.text = String(timerWorkoutModel.workoutTimer)
     }
 }
 
-extension TimerStartViewController {
+extension TimerStartWorkoutViewController: nextSetForScreenWithTimerProtocol {
+    func nextSetTapped() {
+        
+        print("Tap")
+        
+           if numberOfSet < timerWorkoutModel.workoutSets {
+            numberOfSet += 1
+               timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(timerWorkoutModel.workoutSets)"
+        } else {
+            alertOk(title: "Congratulations", message: "Finish your workout")
+        }
+    }
+}
+
+extension TimerStartWorkoutViewController {
     
     private func setupContraints() {
         
         NSLayoutConstraint.activate([
-            nameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            startWorkoutLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            startWorkoutLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            closeButton.heightAnchor.constraint(equalToConstant: 40),
-            closeButton.widthAnchor.constraint(equalToConstant: 40)
+            closeScreenButton.centerYAnchor.constraint(equalTo: startWorkoutLabel.centerYAnchor),
+            closeScreenButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            closeScreenButton.heightAnchor.constraint(equalToConstant: 30),
+            closeScreenButton.widthAnchor.constraint(equalToConstant: 30)
         ])
         
         NSLayoutConstraint.activate([
-            timerImageView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 50),
-            timerImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -50),
-            timerImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 50)
+            timerImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
+            timerImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            timerImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            timerImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
         
         NSLayoutConstraint.activate([
@@ -124,14 +161,14 @@ extension TimerStartViewController {
             timerWorkoutView.topAnchor.constraint(equalTo: detailLabel.bottomAnchor, constant: 5),
             timerWorkoutView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             timerWorkoutView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            timerWorkoutView.heightAnchor.constraint(equalToConstant: 230)
+            timerWorkoutView.heightAnchor.constraint(equalToConstant: 250)
         ])
 
         NSLayoutConstraint.activate([
-            finishButton.topAnchor.constraint(equalTo: timerWorkoutView.bottomAnchor, constant: 10),
+            finishButton.topAnchor.constraint(equalTo: timerWorkoutView.bottomAnchor, constant: 20),
             finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             finishButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            finishButton.heightAnchor.constraint(equalToConstant: 50)
+            finishButton.heightAnchor.constraint(equalToConstant: 55)
         ])
     }
 }

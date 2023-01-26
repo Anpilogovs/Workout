@@ -55,6 +55,7 @@ class StartWorkoutViewController: UIViewController {
     private var numberOfSet = 1
     
     var workoutModel = WorkoutModel()
+    let customAler = CustomAlert()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -110,6 +111,12 @@ class StartWorkoutViewController: UIViewController {
 }
 
 extension StartWorkoutViewController: NextSetProtocol {
+    func editingTap() {
+        customAler.alertCustom(viewController: self) { _, _ in
+            print("Aler")
+        }
+    }
+    
     func nextSetTapped() {
         print("Tap")
         

@@ -10,6 +10,7 @@ import UIKit
 
 protocol NextSetProtocol: AnyObject {
     func nextSetTapped()
+    func editingTap()
 }
 
 class StartWorkoutView: UIView {
@@ -112,7 +113,7 @@ class StartWorkoutView: UIView {
         super.init(frame: frame)
         
         setupViews()
-//        setupContraints()
+        setupContraints()
     }
     
     required init?(coder: NSCoder) {
@@ -142,7 +143,7 @@ class StartWorkoutView: UIView {
     }
     
     @objc func editingButtonTapped() {
-      
+        cellNextSetDelegate?.editingTap()
     }
     
     @objc func nextSetsButtonTapped() {
@@ -152,6 +153,7 @@ class StartWorkoutView: UIView {
 
 extension StartWorkoutView {
     private func setupContraints() {
+        
         NSLayoutConstraint.activate([
             workoutNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             workoutNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
@@ -183,7 +185,6 @@ extension StartWorkoutView {
             repsLineView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
             repsLineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-
 
         NSLayoutConstraint.activate([
             editingButton.topAnchor.constraint(equalTo: repsLineView.bottomAnchor, constant: 20),

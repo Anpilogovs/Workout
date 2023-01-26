@@ -97,7 +97,6 @@ class NewWorkoutViewController: UIViewController {
     }
     
   private func setupViews() {
-      
       view.backgroundColor = .specialBackgound
       
       view.addSubview(scrollView)
@@ -111,7 +110,6 @@ class NewWorkoutViewController: UIViewController {
       scrollView.addSubview(repesOrTimerLabel)
       scrollView.addSubview(repsOrTimerView)
       scrollView.addSubview(saveButton)
-
     }
     
     private func setupDelegate() {
@@ -122,9 +120,17 @@ class NewWorkoutViewController: UIViewController {
         let tapsScreen = UITapGestureRecognizer(target: self, action: #selector(hideKeyBoard))
         tapsScreen.cancelsTouchesInView = false
         view.addGestureRecognizer(tapsScreen)
+        
+        let swipeScreen = UISwipeGestureRecognizer(target: self, action: #selector(swipeHideKeyBoard))
+        swipeScreen.cancelsTouchesInView = false
+        view.addGestureRecognizer(swipeScreen)
     }
     
     @objc private func hideKeyBoard() {
+        view.endEditing(true)
+    }
+    
+    @objc private func swipeHideKeyBoard() {
         view.endEditing(true)
     }
     
@@ -140,10 +146,10 @@ class NewWorkoutViewController: UIViewController {
         workoutModel.workoutName = nameWorkout
         
         workoutModel.workoutDate = dateAndRepeatView.datePicker.date
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.weekday], from: dateAndRepeatView.datePicker.date)
-        guard let weekDay = components.weekday else { return }
-        workoutModel.workoutNumberOfDay = weekDay
+//        let calendar = Calendar.current
+//        let components = calendar.dateComponents([.weekday], from: dateAndRepeatView.datePicker.date)
+//        guard let weekDay = components.weekday else { return }
+        workoutModel.workoutNumberOfDay = dateAndRepeatView.datePicker.date.getWeekDayNumber()
         
         workoutModel.workoutRepeat = (dateAndRepeatView.repeatSwitches.isOn)
         
