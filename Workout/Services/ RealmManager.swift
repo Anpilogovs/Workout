@@ -21,9 +21,16 @@ class RealmManager {
         }
     }
     
-    func updateWorkoutModel(model: WorkoutModel, bool: Bool) {
+    func updateStatusWorkoutModel(model: WorkoutModel, bool: Bool) {
         try! localRealm.write {
             model.status = bool
+        }
+    }
+    
+    func updateSetsAndRepsWorkoutModel(model: WorkoutModel, sets: Int, reps: Int) {
+        try! localRealm.write {
+            model.workoutSets = sets
+            model.workoutReps = reps
         }
     }
     

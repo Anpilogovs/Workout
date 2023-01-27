@@ -9,8 +9,7 @@ import Foundation
 import UIKit
 
 class CustomAlert  {
-    
-    
+
     private let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -25,8 +24,11 @@ class CustomAlert  {
         return view
     }()
     
-    
     private var mainView: UIView?
+    private var setsTextField =  UITextField()
+    private var repsTextField = UITextField()
+    
+    var buttonAction: ( (String, String) -> Void)?
     
     func alertCustom(viewController: UIViewController, completion: @escaping(String, String) -> Void) {
         
@@ -36,14 +38,6 @@ class CustomAlert  {
         backgroundView.frame = parentView.frame
         parentView.addSubview(backgroundView)
         
-        let sportgirlImageView = UIImageView(frame: CGRect(x: alertView.frame.width - alertView.frame.height * 0.4 / 2,
-                                                           y: 30,
-                                                           width: alertView.frame.height * 0.4,
-                                                           height: alertView.frame.height * 0.4))
-        
-        sportgirlImageView.image = UIImage(named: "Girl")
-        sportgirlImageView.contentMode = .scaleAspectFit
-        alertView.addSubview(sportgirlImageView)
         
         alertView.frame = CGRect(x: 40,
                                  y: -420,
@@ -51,10 +45,25 @@ class CustomAlert  {
                                  height: 420)
         parentView.addSubview(alertView)
         
+        let sportgirlImageView = UIImageView(frame: CGRect(x: (alertView.frame.width - alertView.frame.height * 0.4) / 2,
+                                                           y: 30,
+                                                           width: alertView.frame.height * 0.4,
+                                                           height: alertView.frame.height * 0.4))
+        
+        sportgirlImageView.image = UIImage(named: "Girl")
+        sportgirlImageView.contentMode = .scaleAspectFit
+        alertView.addSubview(sportgirlImageView)
+      
+        
         let editingLabel = UILabel(frame: CGRect(x: 10,
                                                  y: alertView.frame.height * 0.4 + 50,
                                                  width: alertView.frame.width - 20,
                                                  height: 25))
+        
+        editingLabel.text  = "Editing"
+        editingLabel.textAlignment = .center
+        editingLabel.font = .robotoMedium22()
+        alertView.addSubview(editingLabel)
         
         let setLabel =  UILabel(text: "Sets")
         setLabel.translatesAutoresizingMaskIntoConstraints = true
@@ -64,15 +73,12 @@ class CustomAlert  {
                                 height: 20)
         alertView.addSubview(setLabel)
         
-        editingLabel.text  = "Editing"
-        editingLabel.textAlignment = .center
-        editingLabel.font = .robotoMedium22()
-        alertView.addSubview(editingLabel)
+      
         
-        let setsTextField = UITextField(frame: CGRect(x: 20,
-                                                      y: setLabel.frame.maxY,
-                                                      width: alertView.frame.width - 40,
-                                                      height: 30))
+        setsTextField.frame = CGRect(x: 20,
+                                     y: setLabel.frame.maxY,
+                                     width: alertView.frame.width - 40,
+                                     height: 30)
         setsTextField.backgroundColor = .specialLightBrown
         setsTextField.borderStyle = .none
         setsTextField.textColor = .specialGrey
@@ -96,10 +102,10 @@ class CustomAlert  {
         alertView.addSubview(repsLabel)
         
         
-        let repsTextField = UITextField(frame: CGRect(x: 20,
-                                                      y: repsLabel.frame.maxY,
-                                                      width: alertView.frame.width - 40,
-                                                      height: 30))
+        repsTextField.frame = CGRect(x: 20,
+                               y: repsLabel.frame.maxY,
+                               width: alertView.frame.width - 40,
+                               height: 30)
         repsTextField.backgroundColor = .specialLightBrown
         repsTextField.borderStyle = .none
         repsTextField.textColor = .specialGrey
@@ -114,7 +120,10 @@ class CustomAlert  {
         repsTextField.keyboardType = .numberPad
         alertView.addSubview(repsTextField)
         
-        let okButton = UIButton(frame: CGRect(x: 50, y: repsTextField.frame.maxY + 15, width: alertView.frame.width - 100, height: 35))
+        let okButton = UIButton(frame: CGRect(x: 50,
+                                              y: repsTextField.frame.maxY + 15,
+                                              width: alertView.frame.width - 100,
+                                              height: 35))
         
         okButton.backgroundColor = .specialGrey
         okButton.setTitle("OK", for: .normal)
@@ -123,6 +132,8 @@ class CustomAlert  {
         okButton.layer.cornerRadius = 10
         okButton.addTarget(self, action: #selector(dismissAlert), for: .touchUpInside)
         alertView.addSubview(okButton)
+        
+        buttonAction = completion
         
         UIView.animate(withDuration: 0.3) {
             self.backgroundView.alpha = 0.8
@@ -136,6 +147,11 @@ class CustomAlert  {
     }
     
     @objc private func dismissAlert() {
+        guard let setsNumber = setsTextField.text else { return }
+        guard let repsNumber = repsTextField.text else { return }
+        
+        buttonAction?(setsNumber, repsNumber)
+        
         
         guard let targetView = mainView else { return }
 
@@ -157,8 +173,6 @@ class CustomAlert  {
 
             }
         }
-
-        
     }
 }
 

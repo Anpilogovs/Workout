@@ -55,7 +55,7 @@ class StartWorkoutViewController: UIViewController {
     private var numberOfSet = 1
     
     var workoutModel = WorkoutModel()
-    let customAler = CustomAlert()
+    let customAlert = CustomAlert()
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -95,7 +95,7 @@ class StartWorkoutViewController: UIViewController {
     @objc func finishButtonTapped() {
         if numberOfSet == workoutModel.workoutSets {
             dismiss(animated: true)
-            RealmManager.shared.updateWorkoutModel(model: workoutModel, bool: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: workoutModel, bool: true)
         } else {
             alertOkCancel(title: "Warning", message: "You have'n finifed your workout") {
                 self.dismiss(animated: true)
@@ -111,15 +111,19 @@ class StartWorkoutViewController: UIViewController {
 }
 
 extension StartWorkoutViewController: NextSetProtocol {
+    
     func editingTap() {
-        customAler.alertCustom(viewController: self) { _, _ in
-            print("Aler")
+        customAlert.alertCustom(viewController: self) { [self] sets, reps in
+            startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(sets)"
+            startWorkoutView.numberOfRepsLabel.text = reps
+            guard let numberOfSets = Int(sets) else { return }
+            guard let numberOfReps = Int(reps) else { return }
+            RealmManager.shared.updateSetsAndRepsWorkoutModel(model: workoutModel, sets: numberOfSets, reps: numberOfReps)
         }
     }
     
     func nextSetTapped() {
-        print("Tap")
-        
+
         if numberOfSet < workoutModel.workoutSets {
             numberOfSet += 1
             startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(workoutModel.workoutSets)"
