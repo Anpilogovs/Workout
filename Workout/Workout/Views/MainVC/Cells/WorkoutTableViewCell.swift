@@ -50,7 +50,7 @@ class WorkoutTableViewCell: UITableViewCell {
     
     private let workoutRepsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Reps: 10"
+        label.text = "Reps: "
         label.textColor = .specialGrey
         label.font = .robotoMedium18()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -59,21 +59,18 @@ class WorkoutTableViewCell: UITableViewCell {
 
     private let workoutSetsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sets: 2"
+        label.text = "Sets: "
         label.textColor = .specialGrey
         label.font = .robotoMedium18()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-     let startButton: UIButton = {
+    let startButton: UIButton = {
         let button = UIButton(type: .system)
-//        button.backgroundColor  = .specialYellow
-        button.layer.cornerRadius = 10
         button.addShadowOnView()
-//        button.setTitle("START", for: .normal)
+        button.layer.cornerRadius = 10
         button.titleLabel?.font = .robotoMedium16()
-        button.tintColor = .specialDarkGreen
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(startButtonTrapped), for: .touchUpInside)
         return button
@@ -115,7 +112,6 @@ class WorkoutTableViewCell: UITableViewCell {
     @objc func startButtonTrapped() {
         
         cellStartWorkoutDelegate?.startButtonTapped(model: workoutModel)
-        
     }
     
     func cellConfigure(model: WorkoutModel) {

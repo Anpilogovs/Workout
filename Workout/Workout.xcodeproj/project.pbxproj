@@ -12,6 +12,8 @@
 		F32619A029735D8600389875 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F326199F29735D8600389875 /* MainViewController.swift */; };
 		F32619A529735D8700389875 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F32619A429735D8700389875 /* Assets.xcassets */; };
 		F32619A829735D8700389875 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32619A629735D8700389875 /* LaunchScreen.storyboard */; };
+		F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38EB8582986696200132883 /* StatisticsTableViewCell.swift */; };
+		F38EB85B2986830500132883 /* Int + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38EB85A2986830500132883 /* Int + Extension.swift */; };
 		F392F314297360D500F85FCE /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F313297360D500F85FCE /* UIColor + Extension.swift */; };
 		F392F316297360E500F85FCE /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F315297360E500F85FCE /* UIFont + Extension.swift */; };
 		F392F318297360F000F85FCE /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F317297360F000F85FCE /* UIView + Extension.swift */; };
@@ -51,6 +53,8 @@
 		F32619A429735D8700389875 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F32619A729735D8700389875 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F32619A929735D8700389875 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F38EB8582986696200132883 /* StatisticsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTableViewCell.swift; sourceTree = "<group>"; };
+		F38EB85A2986830500132883 /* Int + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int + Extension.swift"; sourceTree = "<group>"; };
 		F392F313297360D500F85FCE /* UIColor + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + Extension.swift"; sourceTree = "<group>"; };
 		F392F315297360E500F85FCE /* UIFont + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont + Extension.swift"; sourceTree = "<group>"; };
 		F392F317297360F000F85FCE /* UIView + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + Extension.swift"; sourceTree = "<group>"; };
@@ -164,7 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				F32619B429735F3000389875 /* UIKit */,
-				F392F3582982C8F100F85FCE /* Date + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -177,6 +180,8 @@
 				F392F317297360F000F85FCE /* UIView + Extension.swift */,
 				F392F319297360FE00F85FCE /* UIStackView + Extension.swift */,
 				F392F33A2976EB5E00F85FCE /* UILabel + Extension.swift */,
+				F38EB85A2986830500132883 /* Int + Extension.swift */,
+				F392F3582982C8F100F85FCE /* Date + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -220,6 +225,7 @@
 			children = (
 				F392F32229744BF700F85FCE /* CalendarCollectionViewCell.swift */,
 				F392F327297494B200F85FCE /* WorkoutTableViewCell.swift */,
+				F38EB8582986696200132883 /* StatisticsTableViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -346,6 +352,7 @@
 				F392F3352976E26B00F85FCE /* MainTabBarController.swift in Sources */,
 				F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */,
 				F392F31A297360FE00F85FCE /* UIStackView + Extension.swift in Sources */,
+				F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */,
 				F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */,
 				F392F35529806D0700F85FCE /* TimerStartWorkoutView.swift in Sources */,
 				F392F31C2973610F00F85FCE /* CalendarView.swift in Sources */,
@@ -366,6 +373,7 @@
 				F326199C29735D8600389875 /* AppDelegate.swift in Sources */,
 				F392F348297D4DFF00F85FCE /* SimpleAlert.swift in Sources */,
 				F326199E29735D8600389875 /* SceneDelegate.swift in Sources */,
+				F38EB85B2986830500132883 /* Int + Extension.swift in Sources */,
 				F392F3372976E38F00F85FCE /* StatisticViewController.swift in Sources */,
 				F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */,
 			);

@@ -103,6 +103,9 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+       
+        
         setupViews()
         setUpContraints()
         setupDelegates()

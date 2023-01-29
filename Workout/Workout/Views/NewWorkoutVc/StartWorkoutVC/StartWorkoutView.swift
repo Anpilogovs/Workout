@@ -9,8 +9,8 @@ import Foundation
 import UIKit
 
 protocol NextSetProtocol: AnyObject {
-    func nextSetTapped()
-    func editingTap()
+    func nextSetButtonForStartViewControllerTapped()
+    func editingButtonForStarViewControllerTap()
 }
 
 class StartWorkoutView: UIView {
@@ -143,11 +143,11 @@ class StartWorkoutView: UIView {
     }
     
     @objc func editingButtonTapped() {
-        cellNextSetDelegate?.editingTap()
+        cellNextSetDelegate?.editingButtonForStarViewControllerTap()
     }
     
     @objc func nextSetsButtonTapped() {
-        cellNextSetDelegate?.nextSetTapped()
+        cellNextSetDelegate?.nextSetButtonForStartViewControllerTapped()
     }
 }
 

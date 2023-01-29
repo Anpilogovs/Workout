@@ -10,7 +10,8 @@ import UIKit
 import RealmSwift
 
 protocol nextSetForScreenWithTimerProtocol: AnyObject {
-    func nextSetTapped()
+    func nextSetButtonForTimerViewControllerTapped()
+    func editingButtonForTimeViewControllerTap()
 }
 
 class TimerStartView: UIView {
@@ -48,7 +49,7 @@ class TimerStartView: UIView {
     
     let timeOfSetLabel: UILabel = {
         let label = UILabel()
-        label.text = "Uknown"
+        label.text = "Timer of Set"
         label.tintColor = .specialBrown
         label.font = .robotoMedium18()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -85,6 +86,7 @@ class TimerStartView: UIView {
         button.setImage(UIImage(named: "Editing")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitle("Editing", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(editingTimerButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -129,9 +131,12 @@ class TimerStartView: UIView {
         setsStackView = UIStackView(arrangedSubviews: [setsLabel,setsNumberLabel],
                                     axis: .horizontal,
                                     spacing: 10)
+        setsStackView.distribution = .equalSpacing
+
         timerStackView = UIStackView(arrangedSubviews: [timeOfSetLabel,timeOfSetNumberLabel],
                                      axis: .horizontal,
                                      spacing: 10)
+        timerStackView.distribution = .equalSpacing
         addSubview(nameLabel)
         addSubview(setsStackView)
         addSubview(setsLineView)
@@ -142,7 +147,11 @@ class TimerStartView: UIView {
     }
     
     @objc func nextSetButtonTapped() {
-        nextSetDelegate?.nextSetTapped()
+        nextSetDelegate?.nextSetButtonForTimerViewControllerTapped()
+    }
+    
+    @objc func editingTimerButtonTapped() {
+        nextSetDelegate?.editingButtonForTimeViewControllerTap()
     }
 }
 

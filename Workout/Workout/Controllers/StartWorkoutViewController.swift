@@ -20,7 +20,7 @@ class StartWorkoutViewController: UIViewController {
         return label
     }()
     
-    let imageView: UIImageView = {
+   private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Frame")
         imageView.contentMode = .scaleAspectFit
@@ -29,10 +29,10 @@ class StartWorkoutViewController: UIViewController {
         return imageView
     }()
     
-    let closeButton: UIButton = {
+   private let closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "Close"), for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+       button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -59,7 +59,7 @@ class StartWorkoutViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        closeButton.layer.cornerRadius = closeButton.frame.height / 2
+        closeButton.layer.cornerRadius = closeButton.frame.width / 2
     }
     
     override func viewDidLoad() {
@@ -69,8 +69,6 @@ class StartWorkoutViewController: UIViewController {
         setupContraints()
         setWorkoutParameters()
         setDelegate()
-        
-        print(workoutModel)
     }
     
     private func setupViews() {
@@ -112,17 +110,21 @@ class StartWorkoutViewController: UIViewController {
 
 extension StartWorkoutViewController: NextSetProtocol {
     
-    func editingTap() {
+    func editingButtonForStarViewControllerTap() {
         customAlert.alertCustom(viewController: self) { [self] sets, reps in
-            startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(sets)"
-            startWorkoutView.numberOfRepsLabel.text = reps
-            guard let numberOfSets = Int(sets) else { return }
-            guard let numberOfReps = Int(reps) else { return }
-            RealmManager.shared.updateSetsAndRepsWorkoutModel(model: workoutModel, sets: numberOfSets, reps: numberOfReps)
+            if sets != "" && reps != "" {
+                startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(sets)"
+                startWorkoutView.numberOfRepsLabel.text = reps
+                guard let numberOfSets = Int(sets) else { return }
+                guard let numberOfReps = Int(reps) else { return }
+                RealmManager.shared.updateSetsAndRepsWorkoutModel(model: workoutModel,
+                                                                  sets: numberOfSets,
+                                                                  reps: numberOfReps)
+            }
         }
     }
     
-    func nextSetTapped() {
+    func nextSetButtonForStartViewControllerTapped() {
 
         if numberOfSet < workoutModel.workoutSets {
             numberOfSet += 1
@@ -142,7 +144,7 @@ extension StartWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            closeButton.centerYAnchor.constraint(equalTo: startWorkoutView.centerYAnchor),
+            closeButton.centerYAnchor.constraint(equalTo: startWorkoutLabel.centerYAnchor),
             closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             closeButton.heightAnchor.constraint(equalToConstant: 30),
             closeButton.widthAnchor.constraint(equalToConstant: 30)

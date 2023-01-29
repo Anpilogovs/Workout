@@ -11,23 +11,24 @@ import UIKit
 
 class TimerStartWorkoutViewController: UIViewController {
     
-    let startWorkoutLabel: UILabel = {
+    private let startWorkoutLabel: UILabel = {
         let label = UILabel()
         label.text = "START WORKOUT"
+        label.textAlignment = .center
         label.font = .robotoMedium24()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let closeScreenButton: UIButton = {
+    private  let closeScreenButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Close"), for: .normal)
+        button.setBackgroundImage(UIImage(named: "Close"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(closeScreenButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    let  timerImageView: UIImageView = {
+    let  ellipseImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Ellipsee")
         imageView.contentMode = .scaleAspectFit
@@ -35,37 +36,45 @@ class TimerStartWorkoutViewController: UIViewController {
         return imageView
     }()
     
-    let timerNumberLabel: UILabel = {
-       let label = UILabel()
+    private let timerNumberLabel: UILabel = {
+        let label = UILabel()
         label.text = "01:30"
         label.tintColor = .specialBrown
-        label.font = .robotoMedium24()
+        label.font = .robotoBold48()
         label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let detailLabel = UILabel(text: "Details")
-    
-    let finishButton: UIButton = {
+    private let finishButton: UIButton = {
         let button = UIButton()
         button.setTitle("FINISH", for: .normal)
         button.tintColor = .white
-        button.backgroundColor = .specialDarkGreen
-        button.layer.cornerRadius = 10
+        button.backgroundColor = .specialGreen
         button.titleLabel?.font = .robotoMedium16()
+        button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(finishButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    let timerWorkoutView = TimerStartView()
-    var timerWorkoutModel = WorkoutModel()
+    private let detailLabel = UILabel(text: "Details")
     
-    private var numberOfSet = 1
+    private let timerWorkoutView = TimerStartView()
+    var timerWorkoutModel = WorkoutModel()
+    let customAlert = CustomAlert()
+    
+    var timer = Timer()
+    var durationTimer = 10
+    
+    let shapeLayer = CAShapeLayer()
+    
+    private var numberOfSet = 0
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         closeScreenButton.layer.cornerRadius = closeScreenButton.frame.width / 2
+        animtaionCircle()
     }
     
     override func viewDidLoad() {
@@ -75,6 +84,7 @@ class TimerStartWorkoutViewController: UIViewController {
         setupViews()
         setupContraints()
         setDelegate()
+        addTaps()
     }
     
     private func setupViews() {
@@ -83,41 +93,118 @@ class TimerStartWorkoutViewController: UIViewController {
         
         view.addSubview(startWorkoutLabel)
         view.addSubview(closeScreenButton)
-        view.addSubview(timerImageView)
-        timerImageView.addSubview(timerNumberLabel)
+        view.addSubview(ellipseImageView)
+        view.addSubview(timerNumberLabel)
         view.addSubview(detailLabel)
         view.addSubview(timerWorkoutView)
         view.addSubview(finishButton)
         
         setupWorkoutParametersForScreenWithTimer()
-        
     }
-
+    
     private func setDelegate() {
         timerWorkoutView.nextSetDelegate = self
     }
-
+    
+    @objc func finishButtonTapped() {
+        if numberOfSet == timerWorkoutModel.workoutSets {
+            dismiss(animated: true)
+            RealmManager.shared.updateStatusWorkoutModel(model: timerWorkoutModel, bool: true)
+        } else {
+            alertOk(title: "Warning", message: "You haven't finished your")
+            self.dismiss(animated: true)
+        }
+    }
+    
     @objc func closeScreenButtonTapped() {
         dismiss(animated: true)
     }
     
     private func setupWorkoutParametersForScreenWithTimer() {
+        
+        //        let (min, sec) = { (secs: Int) -> (Int, Int) in
+        //            return (secs / 60, secs % 60)}(timerWorkoutModel.workoutTimer)
+        
         timerWorkoutView.nameLabel.text = timerWorkoutModel.workoutName
         timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(timerWorkoutModel.workoutSets)"
-        timerWorkoutView.timeOfSetNumberLabel.text = String(timerWorkoutModel.workoutTimer)
+        let (min, sec) = timerWorkoutModel.workoutTimer.convertSeconds()
+        timerWorkoutView.timeOfSetNumberLabel.text = "\(min) min \(sec) sec"
+    }
+    
+    private func addTaps() {
+        let tapLabel = UITapGestureRecognizer(target: self, action: #selector(startTimer))
+        timerNumberLabel.isUserInteractionEnabled = true
+        timerNumberLabel.addGestureRecognizer(tapLabel)
+    }
+    
+    @objc private func startTimer() {
+
+        timer = Timer.scheduledTimer(timeInterval: 1,
+                                     target: self,
+                                     selector: #selector(timerAction),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    @objc private func timerAction() {
+        durationTimer -= 1
+        print(durationTimer)
+        
+        if durationTimer == 0 {
+            timer.invalidate() //Reset
+        }
+    }
+}
+//MARK: - Animation
+
+extension TimerStartWorkoutViewController {
+    
+    private func animtaionCircle() {
+        
+        let center = CGPoint(x: ellipseImageView.frame.width / 2, y: ellipseImageView.frame.height / 2)
+        
+        let endAngle = (-CGFloat.pi / 2)
+        let startAngle = 2 * CGFloat.pi + endAngle
+        
+        let circlePath = UIBezierPath(arcCenter: center,
+                                  radius: 135,
+                                  startAngle: startAngle,
+                                  endAngle: endAngle,
+                                  clockwise: false)
+        
+        shapeLayer.path = circlePath.cgPath
+        shapeLayer.lineWidth = 21
+        shapeLayer.fillColor = UIColor.clear.cgColor
+        shapeLayer.strokeEnd = 1
+        shapeLayer.lineCap = .round
+        shapeLayer.strokeColor = UIColor.specialGreen.cgColor
+        ellipseImageView.layer.addSublayer(shapeLayer)
     }
 }
 
 extension TimerStartWorkoutViewController: nextSetForScreenWithTimerProtocol {
-    func nextSetTapped() {
-        
-        print("Tap")
-        
-           if numberOfSet < timerWorkoutModel.workoutSets {
+    
+    func nextSetButtonForTimerViewControllerTapped() {
+        if numberOfSet < timerWorkoutModel.workoutSets {
             numberOfSet += 1
-               timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(timerWorkoutModel.workoutSets)"
+            timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(timerWorkoutModel.workoutSets)"
         } else {
-            alertOk(title: "Congratulations", message: "Finish your workout")
+            alertOk(title: "Error", message: "Finish your workout")
+        }
+    }
+    
+    func editingButtonForTimeViewControllerTap() {
+        
+        customAlert.alertCustom(viewController: self) { [self] sets, timeOfSet in
+            if sets != "" && timeOfSet != "" {
+                timerWorkoutView.setsNumberLabel.text = "\(numberOfSet)/\(sets)"
+                timerWorkoutView.timeOfSetNumberLabel.text = timeOfSet
+                guard let numberOfSets = Int(sets) else { return }
+                guard let timer = Int(timeOfSet) else { return }
+                RealmManager.shared.updateSetsAndRepsWorkoutModel(model: timerWorkoutModel,
+                                                                  sets: numberOfSets,
+                                                                  reps: timer)
+            }
         }
     }
 }
@@ -139,21 +226,21 @@ extension TimerStartWorkoutViewController {
         ])
         
         NSLayoutConstraint.activate([
-            timerImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
-            timerImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            timerImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            timerImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+            ellipseImageView.topAnchor.constraint(equalTo: startWorkoutLabel.bottomAnchor, constant: 20),
+            ellipseImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            ellipseImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            ellipseImageView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
         
         NSLayoutConstraint.activate([
-            timerNumberLabel.centerYAnchor.constraint(equalTo: timerImageView.centerYAnchor),
-            timerNumberLabel.leadingAnchor.constraint(equalTo: timerImageView.leadingAnchor, constant: 70),
-            timerNumberLabel.trailingAnchor.constraint(equalTo: timerImageView.trailingAnchor, constant: -70),
+            timerNumberLabel.centerYAnchor.constraint(equalTo: ellipseImageView.centerYAnchor),
+            timerNumberLabel.leadingAnchor.constraint(equalTo: ellipseImageView.leadingAnchor, constant: 40),
+            timerNumberLabel.trailingAnchor.constraint(equalTo: ellipseImageView.trailingAnchor, constant: -40),
         ])
         
         NSLayoutConstraint.activate([
-            detailLabel.topAnchor.constraint(equalTo: timerImageView.bottomAnchor, constant: 30),
-            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            detailLabel.topAnchor.constraint(equalTo: ellipseImageView.bottomAnchor, constant: 30),
+            detailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
             detailLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
         
@@ -163,7 +250,7 @@ extension TimerStartWorkoutViewController {
             timerWorkoutView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             timerWorkoutView.heightAnchor.constraint(equalToConstant: 250)
         ])
-
+        
         NSLayoutConstraint.activate([
             finishButton.topAnchor.constraint(equalTo: timerWorkoutView.bottomAnchor, constant: 20),
             finishButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
