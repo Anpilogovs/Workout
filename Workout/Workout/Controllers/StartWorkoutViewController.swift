@@ -33,7 +33,7 @@ class StartWorkoutViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "Close"), for: .normal)
        button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
+       button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -111,7 +111,7 @@ class StartWorkoutViewController: UIViewController {
 extension StartWorkoutViewController: NextSetProtocol {
     
     func editingButtonForStarViewControllerTap() {
-        customAlert.alertCustom(viewController: self) { [self] sets, reps in
+        customAlert.alertCustom(viewController: self, repsOrTimer: "Reps") { [self] sets, reps in
             if sets != "" && reps != "" {
                 startWorkoutView.numberOfSetsLabel.text = "\(numberOfSet)/\(sets)"
                 startWorkoutView.numberOfRepsLabel.text = reps

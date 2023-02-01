@@ -14,4 +14,8 @@ extension Int {
         let sec = self % 60
         return (min, sec)
     }
+    
+    func setZeroForSeconds() -> String {
+        return (Double(self) / 10.0 < 1 ? "0\(self)" : "\(self)")
+    }
 }

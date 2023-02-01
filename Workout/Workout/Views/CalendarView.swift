@@ -100,23 +100,7 @@ extension CalendarView: UICollectionViewDataSource {
 extension CalendarView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//
-//        let calendar = Calendar.current
-//        let formatter = DateFormatter()
-//        formatter.timeZone = TimeZone(abbreviation: "UTC")
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//        let component = calendar.dateComponents([.month, .year], from: Date())
-//        guard let month = component.month else { return }
-//        guard let year = component.year else { return }
-//
-//        guard let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell else { return }
-//        guard let numberOfDayString = cell.numberOfDayLabel.text else { return }
-//        guard let numberOfDay = Int(numberOfDayString) else { return }
-//
-//        guard let date = formatter.date(from: "\(year)/\(month)/\(numberOfDay) 00:00") else { return }
-//
-//        cellCollectionViewDelegate?.selectItem(date: date)
-        
+
         let dateTimeZone = Date().localDate()
         
         switch indexPath.item {
@@ -132,10 +116,8 @@ extension CalendarView: UICollectionViewDelegate {
             cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offSetDays(days: 2))
         case 5:
             cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offSetDays(days: 1))
-        
         default:
             cellCollectionViewDelegate?.selectItem(date: dateTimeZone.offSetDays(days: 0))
-
         }
     }
 }

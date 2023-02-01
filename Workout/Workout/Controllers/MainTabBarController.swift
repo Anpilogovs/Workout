@@ -10,8 +10,6 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupItems()
@@ -30,7 +28,7 @@ class MainTabBarController: UITabBarController {
     private func setupItems() {
         let mainVC = MainViewController()
         let statisticVC = StatisticViewController()
-        let profileVC = ProfileViewController()
+        let profileVC = ProfilViewController()
         
         setViewControllers([mainVC,statisticVC,profileVC], animated: true)
         

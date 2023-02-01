@@ -26,25 +26,31 @@ extension Date {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy/MM/dd"
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
+//        formatter.timeZone = TimeZone(abbreviation: "UTC")
         
         let calendar = Calendar.current
         let day = calendar.component(.day, from: self)
         let month = calendar.component(.month, from: self)
         let year = calendar.component(.year, from: self)
         
-        let dateStart = formatter.date(from: "\(day)/\(month)/\(year)") ?? Date()
+        let dateStart = formatter.date(from: "\(year)/\(month)/\(day)") ?? Date()
+        let local = dateStart.localDate()
         let dateEnd: Date = {
-            let components = DateComponents(day: 1, second: -1)
-            return Calendar.current.date(byAdding: components, to: dateStart) ?? Date()
+            let components = DateComponents(day: 1)
+            return calendar.date(byAdding: components, to: local) ?? Date()
         }()
         
-        return (dateStart, dateEnd)
+        return (local, dateEnd)
     }
     
     func offSetDays(days: Int) -> Date {
         let offSetDate = Calendar.current.date(byAdding: .day, value: -days, to: self) ?? Date()
         return offSetDate
+    }
+    
+    func offSetMonth(month: Int) -> Date {
+        let offsetDate = Calendar.current.date(byAdding: .month, value: -month, to: self) ?? Date()
+        return offsetDate
     }
     
     func getWeekArray() -> [[String]] {
@@ -56,16 +62,17 @@ extension Date {
         
         var weekArray: [[String]] = [[], []]
         let calendar = Calendar.current
+//      calendar.timeZone = TimeZone(abbreviation: "UTC")!
         
         for index in -6...0 {
             let date  = calendar.date(byAdding: .weekday, value: index, to: self) ?? Date()
             let day = calendar.component(.day, from: date)
+            print(day)
             weekArray[1].append("\(day)")
             let weekday = formatter.string(from: date)
             weekArray[0].append(weekday)
             print(date)
         }
-        
         return weekArray
     }
 }

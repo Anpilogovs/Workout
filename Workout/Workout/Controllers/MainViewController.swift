@@ -89,7 +89,8 @@ class MainViewController: UIViewController {
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
     
     private let localRealm = try! Realm()
-    private var workoutArray: Results<WorkoutModel>! = nil
+    private var workoutArray: Results<WorkoutModel>!
+    private var userArray: Results<UserModel>!
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
@@ -99,19 +100,23 @@ class MainViewController: UIViewController {
         super.viewWillAppear(animated)
         
         tableView.reloadData()
+        setupUserParameters()
+
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       
+        userArray = localRealm.objects(UserModel.self)
         
         setupViews()
         setUpContraints()
         setupDelegates()
+        setupUserParameters()
         getWorkouts(date: Date())
         
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
+        
     }
     
     private  func setupDelegates() {
@@ -139,25 +144,19 @@ class MainViewController: UIViewController {
         present(newWorkoutViewController, animated: true)
     }
     
+    private func setupUserParameters() {
+        if userArray.count != 0 {
+            userNameLabel.text = userArray[0].userFirstName + userArray[0].userSecondName
+            
+            guard let data = userArray[0].userImage else { return }
+            guard let image = UIImage(data: data) else { return }
+            userPhotoImageView.image = image
+        }
+    }
+    
     private func getWorkouts(date: Date) {
         
-//        let calendar = Calendar.current
-//        let formatter = DateFormatter()
-//        let components = calendar.dateComponents([.weekday, .day, .month, .year], from: date)
-//        guard let weekDay = components.weekday else { return }
-//        guard let day = components.day else { return }
-//        guard let month = components.month else { return }
-//        guard let year = components.year else { return }
-//        formatter.timeZone = TimeZone(abbreviation: "UTC")
-//        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-//
-//        guard let dateStart = formatter.date(from: "\(year)/\(month)/\(day) 00:00") else { return }
-//        let dateEnd: Date = {
-//            let components = DateComponents(day: 1, second: -1)
-//            return Calendar.current.date(byAdding: components, to: dateStart) ?? Date()
-//        }()
-        
-        let dateTimeZone = date.localDate()
+        let dateTimeZone = date
         let weekDay = dateTimeZone.getWeekDayNumber()
         let dateStart = dateTimeZone.startEndDate().0
         let dateEnd = dateTimeZone.startEndDate().1
@@ -168,6 +167,18 @@ class MainViewController: UIViewController {
         
         workoutArray = localRealm.objects(WorkoutModel.self).filter(compound).sorted(byKeyPath: "workoutName")
         tableView.reloadData()
+        checkWorkoutsToday()
+    }
+    
+    private func checkWorkoutsToday() {
+        if workoutArray.count == 0 {
+            tableView.isHidden = true
+            noWorkoutImageView.isHidden = false
+        } else {
+            tableView.isHidden = false
+            noWorkoutImageView.isHidden = true
+            tableView.reloadData()
+        }
     }
 }
 //MARK: - StartWorkoutProtocol

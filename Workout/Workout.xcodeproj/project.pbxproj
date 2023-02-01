@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F30D37FE2987D2A000E093EF /* ProfileViewController .swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D37FD2987D2A000E093EF /* ProfileViewController .swift */; };
+		F30D38002987D2BE00E093EF /* ProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D37FF2987D2BE00E093EF /* ProfileCollectionViewCell.swift */; };
+		F30D38022987D2E500E093EF /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30D38012987D2E500E093EF /* ProfileView.swift */; };
 		F326199C29735D8600389875 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F326199B29735D8600389875 /* AppDelegate.swift */; };
 		F326199E29735D8600389875 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F326199D29735D8600389875 /* SceneDelegate.swift */; };
 		F32619A029735D8600389875 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F326199F29735D8600389875 /* MainViewController.swift */; };
@@ -14,6 +17,8 @@
 		F32619A829735D8700389875 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F32619A629735D8700389875 /* LaunchScreen.storyboard */; };
 		F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38EB8582986696200132883 /* StatisticsTableViewCell.swift */; };
 		F38EB85B2986830500132883 /* Int + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F38EB85A2986830500132883 /* Int + Extension.swift */; };
+		F38EB8602986E62100132883 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F38EB85F2986E62100132883 /* Realm */; };
+		F38EB8622986E62100132883 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F38EB8612986E62100132883 /* RealmSwift */; };
 		F392F314297360D500F85FCE /* UIColor + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F313297360D500F85FCE /* UIColor + Extension.swift */; };
 		F392F316297360E500F85FCE /* UIFont + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F315297360E500F85FCE /* UIFont + Extension.swift */; };
 		F392F318297360F000F85FCE /* UIView + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F317297360F000F85FCE /* UIView + Extension.swift */; };
@@ -29,7 +34,6 @@
 		F392F332297692A000F85FCE /* RepsOrTimerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F331297692A000F85FCE /* RepsOrTimerView.swift */; };
 		F392F3352976E26B00F85FCE /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3342976E26B00F85FCE /* MainTabBarController.swift */; };
 		F392F3372976E38F00F85FCE /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3362976E38F00F85FCE /* StatisticViewController.swift */; };
-		F392F3392976E39E00F85FCE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3382976E39E00F85FCE /* ProfileViewController.swift */; };
 		F392F33B2976EB5E00F85FCE /* UILabel + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F33A2976EB5E00F85FCE /* UILabel + Extension.swift */; };
 		F392F33E2978074E00F85FCE /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = F392F33D2978074E00F85FCE /* Realm */; };
 		F392F3402978074E00F85FCE /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F392F33F2978074E00F85FCE /* RealmSwift */; };
@@ -43,9 +47,16 @@
 		F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F35629806D4800F85FCE /* TimerStartWorkoutViewController.swift */; };
 		F392F3592982C8F100F85FCE /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3582982C8F100F85FCE /* Date + Extension.swift */; };
 		F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F35A2982DA8C00F85FCE /* CustomAlert.swift */; };
+		F39C6D542989148900487FA1 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D532989148900487FA1 /* UserModel.swift */; };
+		F39C6D562989610200487FA1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D552989610200487FA1 /* SettingViewController.swift */; };
+		F39C6D5829896A8D00487FA1 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5729896A8D00487FA1 /* UITextField + Extension.swift */; };
+		F39C6D5A29898CF800487FA1 /* GallaryOrPhotoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5929898CF800487FA1 /* GallaryOrPhotoAlert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F30D37FD2987D2A000E093EF /* ProfileViewController .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController .swift"; sourceTree = "<group>"; };
+		F30D37FF2987D2BE00E093EF /* ProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		F30D38012987D2E500E093EF /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		F326199829735D8600389875 /* Workout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Workout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F326199B29735D8600389875 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F326199D29735D8600389875 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,7 +81,6 @@
 		F392F331297692A000F85FCE /* RepsOrTimerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepsOrTimerView.swift; sourceTree = "<group>"; };
 		F392F3342976E26B00F85FCE /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		F392F3362976E38F00F85FCE /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
-		F392F3382976E39E00F85FCE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		F392F33A2976EB5E00F85FCE /* UILabel + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel + Extension.swift"; sourceTree = "<group>"; };
 		F392F3412978157800F85FCE /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		F392F34429786E4000F85FCE /*  RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " RealmManager.swift"; sourceTree = "<group>"; };
@@ -82,6 +92,10 @@
 		F392F35629806D4800F85FCE /* TimerStartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartWorkoutViewController.swift; sourceTree = "<group>"; };
 		F392F3582982C8F100F85FCE /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		F392F35A2982DA8C00F85FCE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		F39C6D532989148900487FA1 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		F39C6D552989610200487FA1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		F39C6D5729896A8D00487FA1 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
+		F39C6D5929898CF800487FA1 /* GallaryOrPhotoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryOrPhotoAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F38EB8622986E62100132883 /* RealmSwift in Frameworks */,
+				F38EB8602986E62100132883 /* Realm in Frameworks */,
 				F392F3402978074E00F85FCE /* RealmSwift in Frameworks */,
 				F392F33E2978074E00F85FCE /* Realm in Frameworks */,
 			);
@@ -100,7 +116,6 @@
 		F326198F29735D8600389875 = {
 			isa = PBXGroup;
 			children = (
-				F392F34329786E1A00F85FCE /* Services */,
 				F326199A29735D8600389875 /* Workout */,
 				F326199929735D8600389875 /* Products */,
 			);
@@ -117,6 +132,7 @@
 		F326199A29735D8600389875 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
+				F392F34329786E1A00F85FCE /* Services */,
 				F32619AF29735F0F00389875 /* Application */,
 				F32619B029735F1400389875 /* Views */,
 				F32619B229735F2000389875 /* Models */,
@@ -141,6 +157,7 @@
 			children = (
 				F392F325297481F100F85FCE /* WeatherView.swift */,
 				F392F31B2973610F00F85FCE /* CalendarView.swift */,
+				F30D38012987D2E500E093EF /* ProfileView.swift */,
 				F392F3332976BB9D00F85FCE /* NewWorkoutVC */,
 				F392F346297D4D9700F85FCE /* Alerts */,
 				F32619B129735F1A00389875 /* MainVC */,
@@ -160,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				F392F3412978157800F85FCE /* WorkoutModel.swift */,
+				F39C6D532989148900487FA1 /* UserModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -182,6 +200,7 @@
 				F392F33A2976EB5E00F85FCE /* UILabel + Extension.swift */,
 				F38EB85A2986830500132883 /* Int + Extension.swift */,
 				F392F3582982C8F100F85FCE /* Date + Extension.swift */,
+				F39C6D5729896A8D00487FA1 /* UITextField + Extension.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -204,9 +223,10 @@
 				F392F32D2975EA1F00F85FCE /* NewWorkoutViewController.swift */,
 				F392F3342976E26B00F85FCE /* MainTabBarController.swift */,
 				F392F3362976E38F00F85FCE /* StatisticViewController.swift */,
-				F392F3382976E39E00F85FCE /* ProfileViewController.swift */,
 				F392F34B297D9B7200F85FCE /* StartWorkoutViewController.swift */,
 				F392F35629806D4800F85FCE /* TimerStartWorkoutViewController.swift */,
+				F30D37FD2987D2A000E093EF /* ProfileViewController .swift */,
+				F39C6D552989610200487FA1 /* SettingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -226,6 +246,7 @@
 				F392F32229744BF700F85FCE /* CalendarCollectionViewCell.swift */,
 				F392F327297494B200F85FCE /* WorkoutTableViewCell.swift */,
 				F38EB8582986696200132883 /* StatisticsTableViewCell.swift */,
+				F30D37FF2987D2BE00E093EF /* ProfileCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -254,6 +275,7 @@
 				F392F347297D4DFF00F85FCE /* SimpleAlert.swift */,
 				F392F351297F13D300F85FCE /* OKCancelAlert.swift */,
 				F392F35A2982DA8C00F85FCE /* CustomAlert.swift */,
+				F39C6D5929898CF800487FA1 /* GallaryOrPhotoAlert.swift */,
 			);
 			path = Alerts;
 			sourceTree = "<group>";
@@ -286,6 +308,8 @@
 			packageProductDependencies = (
 				F392F33D2978074E00F85FCE /* Realm */,
 				F392F33F2978074E00F85FCE /* RealmSwift */,
+				F38EB85F2986E62100132883 /* Realm */,
+				F38EB8612986E62100132883 /* RealmSwift */,
 			);
 			productName = Workout;
 			productReference = F326199829735D8600389875 /* Workout.app */;
@@ -317,6 +341,7 @@
 			mainGroup = F326198F29735D8600389875;
 			packageReferences = (
 				F392F33C2978074E00F85FCE /* XCRemoteSwiftPackageReference "realm-swift" */,
+				F38EB85E2986E62100132883 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = F326199929735D8600389875 /* Products */;
 			projectDirPath = "";
@@ -351,9 +376,11 @@
 				F392F3592982C8F100F85FCE /* Date + Extension.swift in Sources */,
 				F392F3352976E26B00F85FCE /* MainTabBarController.swift in Sources */,
 				F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */,
+				F39C6D562989610200487FA1 /* SettingViewController.swift in Sources */,
 				F392F31A297360FE00F85FCE /* UIStackView + Extension.swift in Sources */,
 				F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */,
 				F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */,
+				F39C6D542989148900487FA1 /* UserModel.swift in Sources */,
 				F392F35529806D0700F85FCE /* TimerStartWorkoutView.swift in Sources */,
 				F392F31C2973610F00F85FCE /* CalendarView.swift in Sources */,
 				F32619A029735D8600389875 /* MainViewController.swift in Sources */,
@@ -361,12 +388,13 @@
 				F392F33B2976EB5E00F85FCE /* UILabel + Extension.swift in Sources */,
 				F392F3422978157800F85FCE /* WorkoutModel.swift in Sources */,
 				F392F328297494B200F85FCE /* WorkoutTableViewCell.swift in Sources */,
-				F392F3392976E39E00F85FCE /* ProfileViewController.swift in Sources */,
 				F392F318297360F000F85FCE /* UIView + Extension.swift in Sources */,
 				F392F3302975FCB900F85FCE /* DateAndRepeatView.swift in Sources */,
+				F30D38002987D2BE00E093EF /* ProfileCollectionViewCell.swift in Sources */,
 				F392F326297481F100F85FCE /* WeatherView.swift in Sources */,
 				F392F34529786E4000F85FCE /*  RealmManager.swift in Sources */,
 				F392F314297360D500F85FCE /* UIColor + Extension.swift in Sources */,
+				F30D37FE2987D2A000E093EF /* ProfileViewController .swift in Sources */,
 				F392F34A297D99F800F85FCE /* StartWorkoutView.swift in Sources */,
 				F392F32329744BF700F85FCE /* CalendarCollectionViewCell.swift in Sources */,
 				F392F32E2975EA1F00F85FCE /* NewWorkoutViewController.swift in Sources */,
@@ -375,7 +403,10 @@
 				F326199E29735D8600389875 /* SceneDelegate.swift in Sources */,
 				F38EB85B2986830500132883 /* Int + Extension.swift in Sources */,
 				F392F3372976E38F00F85FCE /* StatisticViewController.swift in Sources */,
+				F30D38022987D2E500E093EF /* ProfileView.swift in Sources */,
 				F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */,
+				F39C6D5A29898CF800487FA1 /* GallaryOrPhotoAlert.swift in Sources */,
+				F39C6D5829896A8D00487FA1 /* UITextField + Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +620,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F38EB85E2986E62100132883 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F392F33C2978074E00F85FCE /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
@@ -600,6 +639,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		F38EB85F2986E62100132883 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F392F33C2978074E00F85FCE /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		F38EB8612986E62100132883 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F392F33C2978074E00F85FCE /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
 		F392F33D2978074E00F85FCE /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F392F33C2978074E00F85FCE /* XCRemoteSwiftPackageReference "realm-swift" */;

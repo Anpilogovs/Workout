@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import RealmSwift
+
 
 class StatisticsTableViewCell: UITableViewCell {
     
@@ -17,8 +19,8 @@ class StatisticsTableViewCell: UITableViewCell {
         return label
     }()
     
-  private  let beforeLabel = UILabel(text: "Before:")
-    let nowLabel = UILabel(text: "Now:")
+  private  let beforeLabel = UILabel(text: "Before: ")
+  private let nowLabel = UILabel(text: "Now: ")
     
    private let numeberLabel: UILabel = {
         let label = UILabel()
@@ -36,11 +38,11 @@ class StatisticsTableViewCell: UITableViewCell {
     }()
     
     
-   private var beforeAndNowStackView = UIStackView()
-
-  
+    private var beforeAndNowStackView = UIStackView()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+         
         setupViews()
         setupContraints()
     }
@@ -61,14 +63,29 @@ class StatisticsTableViewCell: UITableViewCell {
         addSubview(numeberLabel)
         addSubview(lineView)
     }
-}
-
-extension StatisticsTableViewCell {
+    
+    func cellConfigure(diffrenceWorkout: DifferenceWorkout) {
+        labelNameWorkout.text = diffrenceWorkout.name
+        beforeLabel.text = "Before: \(diffrenceWorkout.firstReps)"
+        nowLabel.text = "Now: \(diffrenceWorkout.lastReps)"
+        
+        let difference = diffrenceWorkout.lastReps - diffrenceWorkout.firstReps
+        numeberLabel.text = "\(difference)"
+        
+        switch difference {
+        case ..<0: numeberLabel.textColor = .specialGreen
+        case 1...: numeberLabel.textColor = .specialDarkYellow
+        default:
+            numeberLabel.textColor = .specialGrey
+        }
+    }
+    
     private func setupContraints() {
         
         NSLayoutConstraint.activate([
-            labelNameWorkout.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            labelNameWorkout.centerYAnchor.constraint(equalTo: centerYAnchor),
             labelNameWorkout.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
+            labelNameWorkout.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         NSLayoutConstraint.activate([
@@ -77,8 +94,9 @@ extension StatisticsTableViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            numeberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            numeberLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             numeberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            numeberLabel.widthAnchor.constraint(equalToConstant: 50)
         ])
         
         NSLayoutConstraint.activate([
@@ -89,3 +107,4 @@ extension StatisticsTableViewCell {
         ])
     }
 }
+

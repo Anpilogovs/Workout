@@ -145,12 +145,8 @@ class NewWorkoutViewController: UIViewController {
         guard let nameWorkout = nameTextField.text else { return }
         workoutModel.workoutName = nameWorkout
         
-        workoutModel.workoutDate = dateAndRepeatView.datePicker.date
-//        let calendar = Calendar.current
-//        let components = calendar.dateComponents([.weekday], from: dateAndRepeatView.datePicker.date)
-//        guard let weekDay = components.weekday else { return }
+        workoutModel.workoutDate = dateAndRepeatView.datePicker.date.localDate()
         workoutModel.workoutNumberOfDay = dateAndRepeatView.datePicker.date.getWeekDayNumber()
-        
         workoutModel.workoutRepeat = (dateAndRepeatView.repeatSwitches.isOn)
         
         workoutModel.workoutSets = Int(repsOrTimerView.setsSlider.value)
@@ -163,7 +159,7 @@ class NewWorkoutViewController: UIViewController {
     
     private func saveModel() {
         guard let text = nameTextField.text else { return }
-        let count = text.filter { $0.isNumber || $0.isLetter}.count
+        let count = text.filter { $0.isNumber || $0.isLetter }.count
         
         if count != 0 && workoutModel.workoutSets != 0 && workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0 {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
