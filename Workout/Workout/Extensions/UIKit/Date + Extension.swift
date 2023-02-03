@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Date {
     
     func localDate() -> Date {
@@ -61,18 +60,22 @@ extension Date {
         formatter.dateFormat = "EEEEEE"
         
         var weekArray: [[String]] = [[], []]
-        let calendar = Calendar.current
-//      calendar.timeZone = TimeZone(abbreviation: "UTC")!
-        
+        var calendar = Calendar.current
+        calendar.timeZone = TimeZone(abbreviation: "UTC")!
         for index in -6...0 {
             let date  = calendar.date(byAdding: .weekday, value: index, to: self) ?? Date()
             let day = calendar.component(.day, from: date)
-            print(day)
             weekArray[1].append("\(day)")
             let weekday = formatter.string(from: date)
             weekArray[0].append(weekday)
-            print(date)
         }
         return weekArray
+    }
+    
+    func ddMMyyyyFromDate() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        let date = formatter.string(from: self)
+        return date
     }
 }

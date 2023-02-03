@@ -18,7 +18,6 @@ struct ResultWorkout {
 
 class ProfilViewController: UIViewController {
     
-    
     private let profileLabel: UILabel = {
         let label = UILabel()
         label.text = "PROFILE"
@@ -174,6 +173,7 @@ class ProfilViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         editingButton.layer.cornerRadius = editingButton.frame.width / 2
+        userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.height / 2
     }
     
     override func viewDidLoad() {
@@ -185,7 +185,6 @@ class ProfilViewController: UIViewController {
         setupConstraints()
         setupDelegate()
         getWorkoutResults()
-        setupUserParameters()
     }
     
     private func setupView() {
@@ -208,6 +207,7 @@ class ProfilViewController: UIViewController {
         
         view.addSubview(targetStackView)
         view.addSubview(targetView)
+        view.addSubview(progressView)
     }
     
    private func setupDelegate() {
@@ -222,6 +222,7 @@ class ProfilViewController: UIViewController {
     }
     
     private func setupUserParameters() {
+        
         if userArray.count != 0 {
             userNameLabel.text = userArray[0].userFirstName + userArray[0].userSecondName
             userHeightLabel.text = "Weight: \(userArray[0].userHeight)"
@@ -235,6 +236,7 @@ class ProfilViewController: UIViewController {
         }
     }
 
+    //Получаем уникальные имена и добавляем их в массив
     private func getWorkoutName() -> [String] {
         var nameArray = [String]()
         workoutArray = localRealm.objects(WorkoutModel.self)
@@ -247,6 +249,7 @@ class ProfilViewController: UIViewController {
         return nameArray
     }
     
+    //  Получаем массив с уникальными именами и тренировками
     private func getWorkoutResults() {
         
         let nameArray = getWorkoutName()
@@ -301,22 +304,28 @@ extension ProfilViewController {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            profileLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            profileLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
             profileLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ]) 
+        
+        NSLayoutConstraint.activate([
+            userPhotoImageView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 20),
+            userPhotoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            userPhotoImageView.widthAnchor.constraint(equalToConstant: 90),
+            userPhotoImageView.heightAnchor.constraint(equalToConstant: 90)
         ])
         
         NSLayoutConstraint.activate([
-        userPhotoView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant:20),
-        userPhotoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        userPhotoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-        userPhotoView.widthAnchor.constraint(equalToConstant: 110)
+            userPhotoView.topAnchor.constraint(equalTo: profileLabel.bottomAnchor, constant: 80),
+            userPhotoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            userPhotoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            userPhotoView.heightAnchor.constraint(equalToConstant: 110)
         ])
         
         NSLayoutConstraint.activate([
-            userNameLabel.bottomAnchor.constraint(equalTo: userPhotoView.bottomAnchor, constant: -20),
+            userNameLabel.bottomAnchor.constraint(equalTo: userPhotoImageView.bottomAnchor, constant: 40),
             userNameLabel.centerXAnchor.constraint(equalTo: userPhotoView.centerXAnchor)
         ])
-        
         
         NSLayoutConstraint.activate([
             userParamStackView.topAnchor.constraint(equalTo: userPhotoView.bottomAnchor, constant: 5),
@@ -324,7 +333,7 @@ extension ProfilViewController {
         ])
         
         NSLayoutConstraint.activate([
-        editingButton.topAnchor.constraint(equalTo: userWeightLabel.bottomAnchor, constant: 5),
+        editingButton.topAnchor.constraint(equalTo: userPhotoView.bottomAnchor, constant: 5),
         editingButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         editingButton.heightAnchor.constraint(equalToConstant: 25),
         editingButton.widthAnchor.constraint(equalToConstant: 75)
@@ -360,7 +369,7 @@ extension ProfilViewController {
         progressView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         progressView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         progressView.heightAnchor.constraint(equalToConstant: 28)
-    
+
         ])
     }
 }

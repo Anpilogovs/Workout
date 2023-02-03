@@ -78,7 +78,6 @@ class TimerStartWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         setupViews()
         setupContraints()
         setDelegate()

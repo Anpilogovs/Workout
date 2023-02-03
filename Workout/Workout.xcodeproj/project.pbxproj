@@ -51,6 +51,7 @@
 		F39C6D562989610200487FA1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D552989610200487FA1 /* SettingViewController.swift */; };
 		F39C6D5829896A8D00487FA1 /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5729896A8D00487FA1 /* UITextField + Extension.swift */; };
 		F39C6D5A29898CF800487FA1 /* GallaryOrPhotoAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5929898CF800487FA1 /* GallaryOrPhotoAlert.swift */; };
+		F39C6D5D298C5EF900487FA1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5C298C5EF900487FA1 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,6 +97,7 @@
 		F39C6D552989610200487FA1 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F39C6D5729896A8D00487FA1 /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		F39C6D5929898CF800487FA1 /* GallaryOrPhotoAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallaryOrPhotoAlert.swift; sourceTree = "<group>"; };
+		F39C6D5C298C5EF900487FA1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			children = (
 				F326199B29735D8600389875 /* AppDelegate.swift */,
 				F326199D29735D8600389875 /* SceneDelegate.swift */,
+				F39C6D5C298C5EF900487FA1 /* Notifications.swift */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -155,10 +158,11 @@
 		F32619B029735F1400389875 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F392F3332976BB9D00F85FCE /* NewWorkoutVC */,
+				F392F35329806C9700F85FCE /* StartWorkoutVc */,
 				F392F325297481F100F85FCE /* WeatherView.swift */,
 				F392F31B2973610F00F85FCE /* CalendarView.swift */,
 				F30D38012987D2E500E093EF /* ProfileView.swift */,
-				F392F3332976BB9D00F85FCE /* NewWorkoutVC */,
 				F392F346297D4D9700F85FCE /* Alerts */,
 				F32619B129735F1A00389875 /* MainVC */,
 			);
@@ -256,7 +260,6 @@
 			children = (
 				F392F32F2975FCB900F85FCE /* DateAndRepeatView.swift */,
 				F392F331297692A000F85FCE /* RepsOrTimerView.swift */,
-				F392F35329806C9700F85FCE /* StartWorkoutVC */,
 			);
 			path = NewWorkoutVC;
 			sourceTree = "<group>";
@@ -280,13 +283,13 @@
 			path = Alerts;
 			sourceTree = "<group>";
 		};
-		F392F35329806C9700F85FCE /* StartWorkoutVC */ = {
+		F392F35329806C9700F85FCE /* StartWorkoutVc */ = {
 			isa = PBXGroup;
 			children = (
 				F392F349297D99F800F85FCE /* StartWorkoutView.swift */,
 				F392F35429806D0700F85FCE /* TimerStartWorkoutView.swift */,
 			);
-			path = StartWorkoutVC;
+			path = StartWorkoutVc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,6 +379,7 @@
 				F392F3592982C8F100F85FCE /* Date + Extension.swift in Sources */,
 				F392F3352976E26B00F85FCE /* MainTabBarController.swift in Sources */,
 				F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */,
+				F39C6D5D298C5EF900487FA1 /* Notifications.swift in Sources */,
 				F39C6D562989610200487FA1 /* SettingViewController.swift in Sources */,
 				F392F31A297360FE00F85FCE /* UIStackView + Extension.swift in Sources */,
 				F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */,

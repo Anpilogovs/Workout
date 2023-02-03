@@ -61,9 +61,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         addSubview(numberLabel)
     }
     
-    
-    
-     func cellConfigure(model: ResultWorkout) {
+    func cellConfigure(model: ResultWorkout) {
         nameLabel.text = model.name
         numberLabel.text = "\(model.result)"
         
@@ -85,6 +83,13 @@ class ProfileCollectionViewCell: UICollectionViewCell {
             workoutImageView.heightAnchor.constraint(equalToConstant: 57),
             workoutImageView.widthAnchor.constraint(equalToConstant: 57)
         ])
+        
+        NSLayoutConstraint.activate([
+            numberLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20),
+            numberLabel.leadingAnchor.constraint(equalTo: workoutImageView.trailingAnchor, constant: 10),
+            numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+        
     }
 }
 

@@ -37,10 +37,28 @@ class StatisticViewController: UIViewController {
         segmentedControll.setTitleTextAttributes([NSAttributedString.Key.font: font as Any,
                                                   NSAttributedString.Key.foregroundColor: UIColor.white],
                                                  for: .normal)
+        segmentedControll.setTitleTextAttributes([NSAttributedString.Key.font: font as Any,
+                                                  NSAttributedString.Key.foregroundColor: UIColor.specialGrey],
+                                                 for: .selected)
        
         
         segmentedControll.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         return segmentedControll
+    }()
+    
+    private let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.backgroundColor = .specialLightBrown
+        textField.borderStyle  = .none
+        textField.layer.cornerRadius = 10
+        textField.textColor = .specialGrey
+        textField.font = .robotoBold20()
+        textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: textField.frame.height))
+        textField.leftViewMode = .always
+        textField.clearButtonMode = .always
+        textField.returnKeyType = .done
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
     }()
     
     let exercisesLabel = UILabel(text: "Exercises")
@@ -52,7 +70,6 @@ class StatisticViewController: UIViewController {
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.isHidden = false
         return tableView
     }()
 
@@ -60,11 +77,11 @@ class StatisticViewController: UIViewController {
     
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>! = nil
-//
-    private var differenceArray = [DifferenceWorkout]()
-    private var filtredDifference = [DifferenceWorkout]()
 
-    let dateToday = Date().localDate()
+    private var differenceArray = [DifferenceWorkout]()
+    private var filtredArray = [DifferenceWorkout]()
+
+    private let dateToday = Date().localDate()
     private var isFiltred = false
 
     override func viewWillAppear(_ animated: Bool) {
@@ -87,15 +104,18 @@ class StatisticViewController: UIViewController {
         
         view.addSubview(statisticsLabel)
         view.addSubview(segmentedControl)
+        view.addSubview(nameTextField)
         view.addSubview(exercisesLabel)
         view.addSubview(tableView)
         tableView.register(StatisticsTableViewCell.self,
                            forCellReuseIdentifier: idStatisticViewCell)
+        
     }
     
     private func setDelegates() {
         tableView.delegate = self
         tableView.dataSource = self
+        nameTextField.delegate = self
     }
     
     private func setStartScreen() {
@@ -117,6 +137,7 @@ class StatisticViewController: UIViewController {
         }
     }
 
+    //Получае уникальные имена тренировок 
     private func getWorkoutsName() -> [String] {
 
         var nameArray = [String]()
@@ -130,6 +151,7 @@ class StatisticViewController: UIViewController {
         return nameArray
     }
     
+    //Получили массив с уникальнымя именами  и его первое и последнее повторение тренировки
     private func getDifferenceModel(dateStart: Date) {
 
         let dateEnd = Date().localDate()
@@ -150,6 +172,15 @@ class StatisticViewController: UIViewController {
             differenceArray.append(differenceWorkout)
         }
     }
+    
+    private func filtringWorkouts(text: String) {
+        
+        for workout in differenceArray {
+            if workout.name.lowercased().contains(text.lowercased()) {
+                filtredArray.append(workout)
+            }
+        }
+    }
 }
 
 //MARK: - UITableViewDelegate
@@ -165,18 +196,41 @@ extension StatisticViewController: UITableViewDelegate {
 
 extension StatisticViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          differenceArray.count
+        isFiltred ? filtredArray.count : differenceArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticViewCell, for: indexPath) as! StatisticsTableViewCell
         
-        let differenceModel = differenceArray[indexPath.row]
+        let differenceModel = (isFiltred ? filtredArray[indexPath.row] : differenceArray[indexPath.row])
+        
         cell.cellConfigure(diffrenceWorkout: differenceModel)
         
         return cell
     }
 }
+
+//MARK: - UITextFieldDelegate
+
+extension StatisticViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text, let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange, with: string)
+            filtredArray = [DifferenceWorkout]()
+            isFiltred = (updatedText.count > 0 ? true : false)
+            filtringWorkouts(text: updatedText)
+            tableView.reloadData()
+        }
+        return true
+    }
+}
+
+//MARK: - Contraints
 
 extension StatisticViewController {
     
@@ -194,7 +248,14 @@ extension StatisticViewController {
         ])
         
         NSLayoutConstraint.activate([
-            exercisesLabel.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            nameTextField.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 10),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            nameTextField.heightAnchor.constraint(equalToConstant: 30)
+        ])
+        
+        NSLayoutConstraint.activate([
+            exercisesLabel.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 10),
             exercisesLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             exercisesLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
         ])
