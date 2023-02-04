@@ -14,6 +14,7 @@ class MainViewController: UIViewController {
         let imageView = UIImageView()
         imageView.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
         imageView.layer.borderWidth = 5
+        imageView.clipsToBounds = true
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -70,7 +71,6 @@ class MainViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delaysContentTouches = false
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.isHidden = false
         return tableView
     }()
     
@@ -98,7 +98,6 @@ class MainViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         tableView.reloadData()
         setupUserParameters()
 
@@ -106,7 +105,7 @@ class MainViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+       
         userArray = localRealm.objects(UserModel.self)
         
         setupViews()
@@ -117,6 +116,11 @@ class MainViewController: UIViewController {
         
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showOnBoarding()
     }
     
     private  func setupDelegates() {
@@ -144,6 +148,7 @@ class MainViewController: UIViewController {
         present(newWorkoutViewController, animated: true)
     }
     
+    //если наш массив не пустой то добавляем данные на mainviewcontroller
     private func setupUserParameters() {
         if userArray.count != 0 {
             userNameLabel.text = userArray[0].userFirstName + userArray[0].userSecondName
@@ -178,6 +183,16 @@ class MainViewController: UIViewController {
             tableView.isHidden = false
             noWorkoutImageView.isHidden = true
             tableView.reloadData()
+        }
+    }
+    
+    private func showOnBoarding() {
+        let userDefaults = UserDefaults.standard           
+        let onBoardingWasViewed = userDefaults.bool(forKey: "OnBoardingWasViewed")
+        if onBoardingWasViewed == false {
+            let onboardingViewController = OnBoardingViewController()
+            onboardingViewController.modalPresentationStyle = .fullScreen
+            present(onboardingViewController, animated: false)
         }
     }
 }

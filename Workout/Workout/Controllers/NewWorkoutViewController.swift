@@ -161,8 +161,9 @@ class NewWorkoutViewController: UIViewController {
         guard let text = nameTextField.text else { return }
         let count = text.filter { $0.isNumber || $0.isLetter }.count
         
-        if count != 0 && workoutModel.workoutSets != 0 && workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0 {
+        if count != 0 && workoutModel.workoutSets != 0 && (workoutModel.workoutReps != 0 || workoutModel.workoutTimer != 0) {
             RealmManager.shared.saveWorkoutModel(model: workoutModel)
+            createNofication()
             alertOk(title: "Success", message: nil)
             //            Mandatory updating the model after preservation
             workoutModel = WorkoutModel()
@@ -182,6 +183,12 @@ class NewWorkoutViewController: UIViewController {
         repsOrTimerView.setsLabel.text = "0"
         repsOrTimerView.setsNumberLabel.text = "0"
         repsOrTimerView.setsSlider.value = 0
+    }
+    
+    private func createNofication() {
+        let notifications = Notifications()
+        let stringDate = workoutModel.workoutDate.ddMMyyyyFromDate()
+        notifications.scheduleDateNotification(date: workoutModel.workoutDate, id: "workout" + stringDate)
     }
 }
 

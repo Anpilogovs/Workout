@@ -40,8 +40,8 @@ class Notifications: NSObject {
         calendar.timeZone = TimeZone(abbreviation: "UTC")!
         //Расписание для уведовления
         var triggerDate = calendar.dateComponents([.year, .month, .day], from: date)
-        triggerDate.hour = 00
-        triggerDate.minute = 13
+        triggerDate.hour = 21
+        triggerDate.minute = 55
         let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
         
         let request = UNNotificationRequest(identifier: id, content: content, trigger: trigger)
@@ -55,7 +55,6 @@ extension Notifications: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.alert, .sound])
     }
-    
     //отвечает за то когда мы нажимает на уведомление
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         

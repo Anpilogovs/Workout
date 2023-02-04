@@ -22,6 +22,9 @@ extension UIFont {
         return UIFont.init(name: "Roboto-Medium", size: 20)
     }
     
+    static func robotoBold24() -> UIFont? {
+        return UIFont.init(name: "Roboto-Medium", size: 20)
+    }
     
     //Medium
     static func robotoMedium24() -> UIFont? {
