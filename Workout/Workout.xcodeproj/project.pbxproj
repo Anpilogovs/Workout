@@ -54,6 +54,9 @@
 		F39C6D5D298C5EF900487FA1 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D5C298C5EF900487FA1 /* Notifications.swift */; };
 		F39C6D61298D33BD00487FA1 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D60298D33BD00487FA1 /* OnBoardingViewController.swift */; };
 		F39C6D63298D845600487FA1 /* OnBoardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D62298D845600487FA1 /* OnBoardingCollectionViewCell.swift */; };
+		F39C6D66298E709D00487FA1 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D65298E709D00487FA1 /* NetworkRequest.swift */; };
+		F39C6D68298EC61000487FA1 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D67298EC60F00487FA1 /* NetworkDataFetch.swift */; };
+		F39C6D6A298EC66F00487FA1 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D69298EC66F00487FA1 /* WeatherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +105,9 @@
 		F39C6D5C298C5EF900487FA1 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		F39C6D60298D33BD00487FA1 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		F39C6D62298D845600487FA1 /* OnBoardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		F39C6D65298E709D00487FA1 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		F39C6D67298EC60F00487FA1 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
+		F39C6D69298EC66F00487FA1 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 		F326199A29735D8600389875 /* Workout */ = {
 			isa = PBXGroup;
 			children = (
+				F39C6D64298E708900487FA1 /* Network */,
 				F32619B229735F2000389875 /* Models */,
 				F392F34329786E1A00F85FCE /* Services */,
 				F32619AF29735F0F00389875 /* Application */,
@@ -186,6 +193,7 @@
 			children = (
 				F392F3412978157800F85FCE /* WorkoutModel.swift */,
 				F39C6D532989148900487FA1 /* UserModel.swift */,
+				F39C6D69298EC66F00487FA1 /* WeatherModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -298,6 +306,15 @@
 			path = StartWorkoutVC;
 			sourceTree = "<group>";
 		};
+		F39C6D64298E708900487FA1 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				F39C6D65298E709D00487FA1 /* NetworkRequest.swift */,
+				F39C6D67298EC60F00487FA1 /* NetworkDataFetch.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -390,6 +407,7 @@
 				F39C6D562989610200487FA1 /* SettingViewController.swift in Sources */,
 				F392F31A297360FE00F85FCE /* UIStackView + Extension.swift in Sources */,
 				F38EB8592986696200132883 /* StatisticsTableViewCell.swift in Sources */,
+				F39C6D6A298EC66F00487FA1 /* WeatherModel.swift in Sources */,
 				F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */,
 				F39C6D542989148900487FA1 /* UserModel.swift in Sources */,
 				F392F35529806D0700F85FCE /* TimerStartWorkoutView.swift in Sources */,
@@ -414,7 +432,9 @@
 				F392F348297D4DFF00F85FCE /* SimpleAlert.swift in Sources */,
 				F326199E29735D8600389875 /* SceneDelegate.swift in Sources */,
 				F38EB85B2986830500132883 /* Int + Extension.swift in Sources */,
+				F39C6D66298E709D00487FA1 /* NetworkRequest.swift in Sources */,
 				F392F3372976E38F00F85FCE /* StatisticViewController.swift in Sources */,
+				F39C6D68298EC61000487FA1 /* NetworkDataFetch.swift in Sources */,
 				F30D38022987D2E500E093EF /* ProfileView.swift in Sources */,
 				F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */,
 				F39C6D5A29898CF800487FA1 /* GallaryOrPhotoAlert.swift in Sources */,

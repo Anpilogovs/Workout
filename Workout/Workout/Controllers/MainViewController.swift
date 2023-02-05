@@ -85,37 +85,32 @@ class MainViewController: UIViewController {
     
     private let calendarView = CalendarView()
     private let weatherView = WeatherView()
-    
     private let idWorkoutTableViewCell = "idWorkoutTableViewCell"
-    
     private let localRealm = try! Realm()
     private var workoutArray: Results<WorkoutModel>!
     private var userArray: Results<UserModel>!
     
     override func viewDidLayoutSubviews() {
         userPhotoImageView.layer.cornerRadius = userPhotoImageView.frame.width / 2
+        setUpContraints()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getWeather()
         tableView.reloadData()
         setupUserParameters()
-
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
         userArray = localRealm.objects(UserModel.self)
-        
         setupViews()
         setUpContraints()
         setupDelegates()
-        setupUserParameters()
         getWorkouts(date: Date())
-        
         tableView.register(WorkoutTableViewCell.self, forCellReuseIdentifier: idWorkoutTableViewCell)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -147,7 +142,6 @@ class MainViewController: UIViewController {
         newWorkoutViewController.modalPresentationStyle = .fullScreen
         present(newWorkoutViewController, animated: true)
     }
-    
     //если наш массив не пустой то добавляем данные на mainviewcontroller
     private func setupUserParameters() {
         if userArray.count != 0 {
@@ -195,6 +189,19 @@ class MainViewController: UIViewController {
             present(onboardingViewController, animated: false)
         }
     }
+    
+    private func getWeather() {
+        NetworkDataFetch.shared.fetchWeather { [weak self] model, error in
+            guard let self = self else { return }
+            if error == nil {
+                self.weatherView.descriptionWeatherLabel.text = model.weather[0].informationAboutWeather
+                self.weatherView.nameWeatherLabel.text = "\(model.main.temp)°C"
+                self.weatherView.weatherImageView.image = UIImage(systemName: model.weather[0].iconLocal)
+            } else {
+                self.alertOk(title: "Error", message: "Non Weather Data")
+            }
+        }
+    }
 }
 //MARK: - StartWorkoutProtocol
 
@@ -215,7 +222,6 @@ extension MainViewController: StartWorkoutProtocol {
         }
     }
 }
-
 //MARK: - SelectCollectionViewItemProtocol
 
 extension MainViewController: SelectCollectionViewItemProtocol {
@@ -224,7 +230,6 @@ extension MainViewController: SelectCollectionViewItemProtocol {
         getWorkouts(date: date)
     }
 }
-
 //MARK: - UITableViewDataSource
 
 extension MainViewController: UITableViewDataSource {
@@ -243,7 +248,6 @@ extension MainViewController: UITableViewDataSource {
 }
 
 //MARK: - UITableViewDelegate
-
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -265,7 +269,6 @@ extension MainViewController: UITableViewDelegate {
 }
 
 //MARK: - setUpContraints
-
 extension MainViewController {
     
     private func setUpContraints() {
@@ -307,7 +310,6 @@ extension MainViewController {
             workoutTodayLabel.topAnchor.constraint(equalTo: addWorkoutButton.bottomAnchor, constant: 10),
             workoutTodayLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
         ])
-        
         
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: workoutTodayLabel.bottomAnchor, constant: 0),

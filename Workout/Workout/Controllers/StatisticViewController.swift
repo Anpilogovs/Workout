@@ -82,7 +82,7 @@ class StatisticViewController: UIViewController {
     private var filtredArray = [DifferenceWorkout]()
 
     private let dateToday = Date().localDate()
-    private var isFiltred = false
+    private var isFiltred = true
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -191,7 +191,6 @@ extension StatisticViewController: UITableViewDelegate {
         return 55
     }
 }
-
 //MARK: - UITableViewDataSource
 
 extension StatisticViewController: UITableViewDataSource {
@@ -201,23 +200,15 @@ extension StatisticViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        let cell = tableView.dequeueReusableCell(withIdentifier: idStatisticViewCell, for: indexPath) as! StatisticsTableViewCell
-        
         let differenceModel = (isFiltred ? filtredArray[indexPath.row] : differenceArray[indexPath.row])
-        
         cell.cellConfigure(diffrenceWorkout: differenceModel)
-        
         return cell
     }
 }
-
 //MARK: - UITextFieldDelegate
 
 extension StatisticViewController: UITextFieldDelegate {
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-    }
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text, let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange, with: string)
@@ -226,6 +217,19 @@ extension StatisticViewController: UITextFieldDelegate {
             filtringWorkouts(text: updatedText)
             tableView.reloadData()
         }
+        return true
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    //метод который при удаления поиска - возвращается все данные за день или месяц
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        isFiltred = false
+        differenceArray = [DifferenceWorkout]()
+        getDifferenceModel(dateStart: dateToday.offSetDays(days: 7))
+        tableView.reloadData()
         return true
     }
 }
