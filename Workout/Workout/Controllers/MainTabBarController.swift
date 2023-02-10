@@ -15,6 +15,7 @@ class MainTabBarController: UITabBarController {
         setupItems()
         setupTabBar()
         
+    
     }
     
     private func setupTabBar() {
@@ -30,7 +31,7 @@ class MainTabBarController: UITabBarController {
         let statisticVC = StatisticViewController()
         let profileVC = ProfilViewController()
         
-        setViewControllers([mainVC,statisticVC,profileVC], animated: true)
+       viewControllers = [mainVC,statisticVC,profileVC]
         
         guard let items = tabBar.items else { return }
         

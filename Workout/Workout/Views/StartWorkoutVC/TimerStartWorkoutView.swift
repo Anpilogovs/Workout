@@ -86,7 +86,7 @@ class TimerStartView: UIView {
         button.setImage(UIImage(named: "Editing")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.setTitle("Editing", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(TimerStartView.self, action: #selector(editingTimerButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(editingTimerButtonTapped), for: .touchUpInside)
         return button
     }()
     

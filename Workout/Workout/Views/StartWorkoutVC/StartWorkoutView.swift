@@ -100,7 +100,7 @@ class StartWorkoutView: UIView {
         button.titleLabel?.font = .robotoMedium16()
         button.tintColor = .specialLightBrown
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(StartWorkoutView.self, action: #selector(editingButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(editingButtonTapped), for: .touchUpInside)
         return button
     }()
     

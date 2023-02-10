@@ -74,7 +74,6 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
-            
         ])
         
         NSLayoutConstraint.activate([
@@ -89,7 +88,6 @@ class ProfileCollectionViewCell: UICollectionViewCell {
             numberLabel.leadingAnchor.constraint(equalTo: workoutImageView.trailingAnchor, constant: 10),
             numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
-        
     }
 }
 

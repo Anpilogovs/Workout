@@ -9,7 +9,7 @@ import UIKit
 
 class WeatherView: UIView {
     
-     let weatherImageView: UIImageView = {
+    let weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Sun")
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class WeatherView: UIView {
         return label
     }()
     
-     let descriptionWeatherLabel: UILabel = {
+    let descriptionWeatherLabel: UILabel = {
         let label = UILabel()
         label.textColor = .specialGrey
         label.text = "Хорошоая погода,чтобы позаниматься на улице"
@@ -38,25 +38,20 @@ class WeatherView: UIView {
         return label
     }()
     
-    
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
         setupContraint()
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupViews() {
-        
         backgroundColor = .white
         layer.cornerRadius = 10
-            addShadowOnView()
+        addShadowOnView()
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(weatherImageView)
@@ -64,6 +59,7 @@ class WeatherView: UIView {
         addSubview(descriptionWeatherLabel)
     }
 }
+//MARK: - setupContraint
 
 extension WeatherView {
     func setupContraint() {
@@ -83,12 +79,10 @@ extension WeatherView {
         ])
         
         NSLayoutConstraint.activate([
-        
-        descriptionWeatherLabel.topAnchor.constraint(equalTo: nameWeatherLabel.bottomAnchor, constant: 5),
-        descriptionWeatherLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-        descriptionWeatherLabel.trailingAnchor.constraint(equalTo: weatherImageView.leadingAnchor, constant: -10),
-        descriptionWeatherLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
-        
+            descriptionWeatherLabel.topAnchor.constraint(equalTo: nameWeatherLabel.bottomAnchor, constant: 5),
+            descriptionWeatherLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            descriptionWeatherLabel.trailingAnchor.constraint(equalTo: weatherImageView.leadingAnchor, constant: -10),
+            descriptionWeatherLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
 }

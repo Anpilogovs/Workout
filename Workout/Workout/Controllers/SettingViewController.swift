@@ -127,7 +127,6 @@ class SettingViewController: UIViewController {
             weightStackView, targetStackView], axis: .vertical, spacing: 20)
         
         view.addSubview(generalStackView)
-        generalStackView.backgroundColor = .specialGrey
         view.addSubview(saveButton)
     }
     
@@ -265,8 +264,7 @@ extension SettingViewController {
             
             generalStackView.topAnchor.constraint(equalTo: addPhotoView.bottomAnchor,constant: 5),
             generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,constant: 30),
-            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-            generalStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6)
+            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30)
         ])
         
         NSLayoutConstraint.activate([

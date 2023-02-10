@@ -25,7 +25,6 @@ class CustomAlert  {
     }()
     
     private let scrollView = UIScrollView()
-    
     private var mainView: UIView?
     private var setsTextField =  UITextField()
     private var repsTextField = UITextField()
@@ -197,15 +196,11 @@ class CustomAlert  {
     }
     
     @objc private func kbWillShow() {
-        
         scrollView.contentOffset = CGPoint(x: 0, y: 100)
-        
     }
     
     @objc private func kbWillHide() {
-        
         scrollView.contentOffset = CGPoint.zero
-    
     }
 }
 

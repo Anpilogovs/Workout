@@ -19,7 +19,7 @@ struct Main: Codable {
     let temp: Double
     
     var temperatureCelsius: String {
-        return String(format: "%.1f", temp)
+        return String(format: "%.1f", temp - 273.15)
     }
 }
 
@@ -56,56 +56,3 @@ struct Weather: Codable {
         }
     }
 }
-
-
-
-
-
-
-
-//struct WeatherModel: Decodable {
-//    let currentrly: Currently
-//}
-//
-//struct Currently: Decodable {
-//    let temperature: Double
-//    let icon: String?
-//
-//
-//    var temperatureCelsius: Int  {
-//        return (Int(temperature) - 32) * 5 / 9
-//    }
-//
-//    var iconLocal: String {
-//        switch icon {
-//        case "clear-day": return "clearly"
-//        case "clear-night": return "Clear night"
-//        case "rain": return "Rain"
-//        case "snow": return "Snow"
-//        case "sleet": return "Wet snow"
-//        case "wind": return "Windy"
-//        case "fog": return "For"
-//        case "cloudy": return "Cloudy"
-//        case "partly-cloudy-day": return "It's a nasty day"
-//        case "partly-cloudy-day": return "Сloudy night"
-//        default: return "No data"
-//        }
-//    }
-//
-//    var description: String {
-//        switch icon {
-//        case "clear-day": return "clearly"
-//        case "clear-night": return "Clear night"
-//        case "rain": return "Rain"
-//        case "snow": return "Snow"
-//        case "sleet": return "Wet snow"
-//        case "wind": return "Windy"
-//        case "fog": return "For"
-//        case "cloudy": return "Cloudy"
-//        case "partly-cloudy-day": return "It's a nasty day"
-//        case "partly-cloudy-day": return "Сloudy night"
-//        default: return "No data"
-//        }
-//    }
-//}
-//

@@ -195,7 +195,7 @@ class MainViewController: UIViewController {
             guard let self = self else { return }
             if error == nil {
                 self.weatherView.descriptionWeatherLabel.text = model.weather[0].informationAboutWeather
-                self.weatherView.nameWeatherLabel.text = "\(model.main.temp)°C"
+                self.weatherView.nameWeatherLabel.text = "\(model.main.temperatureCelsius)°C"
                 self.weatherView.weatherImageView.image = UIImage(systemName: model.weather[0].iconLocal)
             } else {
                 self.alertOk(title: "Error", message: "Non Weather Data")

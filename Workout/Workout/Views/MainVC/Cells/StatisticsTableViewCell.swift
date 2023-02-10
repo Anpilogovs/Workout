@@ -37,7 +37,6 @@ class StatisticsTableViewCell: UITableViewCell {
         return view
     }()
     
-    
     private var beforeAndNowStackView = UIStackView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

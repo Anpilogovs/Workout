@@ -43,7 +43,6 @@ class CalendarView: UIView {
         translatesAutoresizingMaskIntoConstraints = false
         
         addSubview(collectionView)
-       
     }
     
     private func setDelegates() {
@@ -66,8 +65,8 @@ extension CalendarView: UICollectionViewDataSource {
         let weekArray =  dateTimeZone.getWeekArray()
         cell.cellConfigure(numberOfDay: weekArray[1][indexPath.item], dayOfWeek: weekArray[0][indexPath.item])
         
-       if indexPath.item == 6 {
-           collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
+        if indexPath.item == 6 {
+            collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .right)
         }
         return cell
     }
@@ -78,7 +77,7 @@ extension CalendarView: UICollectionViewDataSource {
 extension CalendarView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         let dateTimeZone = Date().localDate()
         
         switch indexPath.item {
@@ -103,7 +102,7 @@ extension CalendarView: UICollectionViewDelegate {
 //MARK: - UICollectionViewDelegateFlowLayout
 
 extension CalendarView: UICollectionViewDelegateFlowLayout {
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.frame.width / 8,
                height: collectionView.frame.height)
@@ -115,9 +114,7 @@ extension CalendarView: UICollectionViewDelegateFlowLayout {
 }
 //MARK: - setCostraints
 extension CalendarView {
-    
     private func setCostraints() {
-        
         NSLayoutConstraint.activate([
             collectionView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 105),
