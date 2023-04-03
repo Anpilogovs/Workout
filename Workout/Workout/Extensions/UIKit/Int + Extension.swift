@@ -1,10 +1,3 @@
-//
-//  Int + Extensions.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 29.01.2023.
-//
-
 import Foundation
 
 extension Int {

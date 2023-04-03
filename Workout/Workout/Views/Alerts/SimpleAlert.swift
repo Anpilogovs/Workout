@@ -1,10 +1,3 @@
-//
-//  SimpleAlert.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 22.01.2023.
-//
-
 import Foundation
 import UIKit
 

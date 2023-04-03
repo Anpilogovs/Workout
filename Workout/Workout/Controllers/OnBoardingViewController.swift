@@ -1,10 +1,3 @@
-//
-//  OnBoardingViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 03.02.2023.
-//
-
 import UIKit
 
 struct OnboardingStruct {
@@ -13,7 +6,7 @@ struct OnboardingStruct {
     let image: UIImage
 }
 
-class OnBoardingViewController: UIViewController {
+final class OnBoardingViewController: UIViewController {
     
     private let nextButton: UIButton =  {
         let button = UIButton(type: .system)
@@ -112,7 +105,6 @@ class OnBoardingViewController: UIViewController {
         dismiss(animated: true)
     }
 }
-
 //MARK: - UICollectionViewDataSource
 extension OnBoardingViewController: UICollectionViewDataSource {
     
@@ -127,7 +119,6 @@ extension OnBoardingViewController: UICollectionViewDataSource {
         return cell
     }
 }
-
 //MARK: - UICollectionViewDelegateFlowLayout
 extension OnBoardingViewController: UICollectionViewDelegateFlowLayout {
     

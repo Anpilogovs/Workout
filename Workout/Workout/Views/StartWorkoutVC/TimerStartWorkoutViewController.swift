@@ -1,7 +1,15 @@
+//
+//  TimerStartViewController.swift
+//  Workout
+//
+//  Created by Сергей Анпилогов on 24.01.2023.
+//
+
 import Foundation
 import UIKit
 
-final class TimerStartWorkoutViewController: UIViewController {
+
+class TimerStartWorkoutViewController: UIViewController {
     
     private let startWorkoutLabel: UILabel = {
         let label = UILabel()
@@ -69,6 +77,7 @@ final class TimerStartWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         setupViews()
         setupContraints()

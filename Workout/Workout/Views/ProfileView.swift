@@ -1,15 +1,8 @@
-//
-//  ProfileView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 30.01.2023.
-//
-
 import Foundation
 import UIKit
 
 
-class ProfileView: UIView {
+final class ProfileView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)

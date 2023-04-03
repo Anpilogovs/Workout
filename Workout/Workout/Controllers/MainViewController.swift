@@ -1,14 +1,7 @@
-//
-//  ViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import UIKit
 import RealmSwift
 
-class MainViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     private let userPhotoImageView: UIImageView =  {
         let imageView = UIImageView()
@@ -173,6 +166,7 @@ class MainViewController: UIViewController {
         if workoutArray.count == 0 {
             tableView.isHidden = true
             noWorkoutImageView.isHidden = false
+            
         } else {
             tableView.isHidden = false
             noWorkoutImageView.isHidden = true
@@ -204,7 +198,6 @@ class MainViewController: UIViewController {
     }
 }
 //MARK: - StartWorkoutProtocol
-
 extension MainViewController: StartWorkoutProtocol {
     
     func startButtonTapped(model: WorkoutModel) {
@@ -231,7 +224,6 @@ extension MainViewController: SelectCollectionViewItemProtocol {
     }
 }
 //MARK: - UITableViewDataSource
-
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return workoutArray.count

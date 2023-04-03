@@ -1,15 +1,7 @@
-//
-//  WorkoutView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 17.01.2023.
-//
-
-import Foundation
 import UIKit
 
-class RepsOrTimerView: UIView {
-    
+final class RepsOrTimerView: UIView {
+
      let setsLabel: UILabel = {
         let label = UILabel()
         label.text = "Sets"
@@ -107,7 +99,6 @@ class RepsOrTimerView: UIView {
     private var repsStackView = UIStackView()
     private var timerStackView = UIStackView()
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -120,18 +111,18 @@ class RepsOrTimerView: UIView {
         
     }
     
-    @objc func setsSliderChanged() {
+    @objc private func setsSliderChanged() {
         setsNumberLabel.text = "\(Int(setsSlider.value))"
     }
     
-    @objc func repsSliderChanged() {
+    @objc private func repsSliderChanged() {
         repsNumberLabel.text = "\(Int(repsSlider.value))"
         
         setNegative(label: timerLabel, numberLabel: timerNumberLabel, slider: timerSlider)
         setActive(label: repsLabel, numberLabel: repsNumberLabel, slider: repsSlider)
     }
     
-    @objc func timerSliderChanged() {
+    @objc private func timerSliderChanged() {
         
         let (min, sec) = { (secs: Int) -> (Int, Int) in
             return (secs / 60, secs % 60)}(Int(timerSlider.value))
@@ -182,6 +173,7 @@ class RepsOrTimerView: UIView {
         addSubview(timerSlider)
     }
 }
+//MARK: - setupContraint
 
 extension RepsOrTimerView {
     

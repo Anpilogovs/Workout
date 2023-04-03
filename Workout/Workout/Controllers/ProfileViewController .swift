@@ -1,10 +1,3 @@
-//
-//  ProfileViewController .swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 30.01.2023.
-//
-
 import Foundation
 import UIKit
 import RealmSwift
@@ -16,7 +9,7 @@ struct ResultWorkout {
 }
 
 
-class ProfilViewController: UIViewController {
+final class ProfilViewController: UIViewController {
     
     private let profileLabel: UILabel = {
         let label = UILabel()

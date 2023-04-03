@@ -1,14 +1,7 @@
-//
-//  WeatherModel.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 04.02.2023.
-//
-
 import Foundation
 import UIKit
 
-struct Welcome: Codable {
+struct WeatherModel: Codable {
     let weather: [Weather]
     let main: Main
     let name: String

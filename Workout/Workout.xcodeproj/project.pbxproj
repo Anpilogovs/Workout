@@ -40,10 +40,8 @@
 		F392F3422978157800F85FCE /* WorkoutModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3412978157800F85FCE /* WorkoutModel.swift */; };
 		F392F34529786E4000F85FCE /*  RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F34429786E4000F85FCE /*  RealmManager.swift */; };
 		F392F348297D4DFF00F85FCE /* SimpleAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F347297D4DFF00F85FCE /* SimpleAlert.swift */; };
-		F392F34A297D99F800F85FCE /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F349297D99F800F85FCE /* StartWorkoutView.swift */; };
 		F392F34C297D9B7200F85FCE /* StartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F34B297D9B7200F85FCE /* StartWorkoutViewController.swift */; };
 		F392F352297F13D300F85FCE /* OKCancelAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F351297F13D300F85FCE /* OKCancelAlert.swift */; };
-		F392F35529806D0700F85FCE /* TimerStartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F35429806D0700F85FCE /* TimerStartWorkoutView.swift */; };
 		F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F35629806D4800F85FCE /* TimerStartWorkoutViewController.swift */; };
 		F392F3592982C8F100F85FCE /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F3582982C8F100F85FCE /* Date + Extension.swift */; };
 		F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F392F35A2982DA8C00F85FCE /* CustomAlert.swift */; };
@@ -57,6 +55,8 @@
 		F39C6D66298E709D00487FA1 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D65298E709D00487FA1 /* NetworkRequest.swift */; };
 		F39C6D68298EC61000487FA1 /* NetworkDataFetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D67298EC60F00487FA1 /* NetworkDataFetch.swift */; };
 		F39C6D6A298EC66F00487FA1 /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F39C6D69298EC66F00487FA1 /* WeatherModel.swift */; };
+		F3B2D0C129B15F37006F8139 /* TimerStartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2D0C029B15F37006F8139 /* TimerStartWorkoutView.swift */; };
+		F3B2D0C729B15FA6006F8139 /* StartWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B2D0C629B15FA6006F8139 /* StartWorkoutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,10 +91,8 @@
 		F392F3412978157800F85FCE /* WorkoutModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutModel.swift; sourceTree = "<group>"; };
 		F392F34429786E4000F85FCE /*  RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " RealmManager.swift"; sourceTree = "<group>"; };
 		F392F347297D4DFF00F85FCE /* SimpleAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlert.swift; sourceTree = "<group>"; };
-		F392F349297D99F800F85FCE /* StartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
 		F392F34B297D9B7200F85FCE /* StartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartWorkoutViewController.swift; sourceTree = "<group>"; };
 		F392F351297F13D300F85FCE /* OKCancelAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OKCancelAlert.swift; sourceTree = "<group>"; };
-		F392F35429806D0700F85FCE /* TimerStartWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartWorkoutView.swift; sourceTree = "<group>"; };
 		F392F35629806D4800F85FCE /* TimerStartWorkoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerStartWorkoutViewController.swift; sourceTree = "<group>"; };
 		F392F3582982C8F100F85FCE /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		F392F35A2982DA8C00F85FCE /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
@@ -108,6 +106,8 @@
 		F39C6D65298E709D00487FA1 /* NetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		F39C6D67298EC60F00487FA1 /* NetworkDataFetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetch.swift; sourceTree = "<group>"; };
 		F39C6D69298EC66F00487FA1 /* WeatherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherModel.swift; sourceTree = "<group>"; };
+		F3B2D0C029B15F37006F8139 /* TimerStartWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimerStartWorkoutView.swift; sourceTree = "<group>"; };
+		F3B2D0C629B15FA6006F8139 /* StartWorkoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartWorkoutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,8 +300,8 @@
 		F392F35329806C9700F85FCE /* StartWorkoutVC */ = {
 			isa = PBXGroup;
 			children = (
-				F392F349297D99F800F85FCE /* StartWorkoutView.swift */,
-				F392F35429806D0700F85FCE /* TimerStartWorkoutView.swift */,
+				F3B2D0C629B15FA6006F8139 /* StartWorkoutView.swift */,
+				F3B2D0C029B15F37006F8139 /* TimerStartWorkoutView.swift */,
 			);
 			path = StartWorkoutVC;
 			sourceTree = "<group>";
@@ -410,11 +410,11 @@
 				F39C6D6A298EC66F00487FA1 /* WeatherModel.swift in Sources */,
 				F392F35729806D4800F85FCE /* TimerStartWorkoutViewController.swift in Sources */,
 				F39C6D542989148900487FA1 /* UserModel.swift in Sources */,
-				F392F35529806D0700F85FCE /* TimerStartWorkoutView.swift in Sources */,
 				F392F31C2973610F00F85FCE /* CalendarView.swift in Sources */,
 				F32619A029735D8600389875 /* MainViewController.swift in Sources */,
 				F392F34C297D9B7200F85FCE /* StartWorkoutViewController.swift in Sources */,
 				F392F33B2976EB5E00F85FCE /* UILabel + Extension.swift in Sources */,
+				F3B2D0C729B15FA6006F8139 /* StartWorkoutView.swift in Sources */,
 				F392F3422978157800F85FCE /* WorkoutModel.swift in Sources */,
 				F392F328297494B200F85FCE /* WorkoutTableViewCell.swift in Sources */,
 				F392F318297360F000F85FCE /* UIView + Extension.swift in Sources */,
@@ -425,7 +425,6 @@
 				F39C6D61298D33BD00487FA1 /* OnBoardingViewController.swift in Sources */,
 				F392F314297360D500F85FCE /* UIColor + Extension.swift in Sources */,
 				F30D37FE2987D2A000E093EF /* ProfileViewController .swift in Sources */,
-				F392F34A297D99F800F85FCE /* StartWorkoutView.swift in Sources */,
 				F392F32329744BF700F85FCE /* CalendarCollectionViewCell.swift in Sources */,
 				F392F32E2975EA1F00F85FCE /* NewWorkoutViewController.swift in Sources */,
 				F326199C29735D8600389875 /* AppDelegate.swift in Sources */,
@@ -434,6 +433,7 @@
 				F38EB85B2986830500132883 /* Int + Extension.swift in Sources */,
 				F39C6D66298E709D00487FA1 /* NetworkRequest.swift in Sources */,
 				F392F3372976E38F00F85FCE /* StatisticViewController.swift in Sources */,
+				F3B2D0C129B15F37006F8139 /* TimerStartWorkoutView.swift in Sources */,
 				F39C6D68298EC61000487FA1 /* NetworkDataFetch.swift in Sources */,
 				F30D38022987D2E500E093EF /* ProfileView.swift in Sources */,
 				F392F35B2982DA8C00F85FCE /* CustomAlert.swift in Sources */,

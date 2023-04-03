@@ -1,15 +1,8 @@
-//
-//  CustomAlert.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 26.01.2023.
-//
-
 import Foundation
 import UIKit
 
 class CustomAlert  {
-
+    
     private let backgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = .black
@@ -59,7 +52,7 @@ class CustomAlert  {
         sportgirlImageView.image = UIImage(named: "Girl")
         sportgirlImageView.contentMode = .scaleAspectFit
         alertView.addSubview(sportgirlImageView)
-      
+        
         
         let editingLabel = UILabel(frame: CGRect(x: 10,
                                                  y: alertView.frame.height * 0.4 + 50,
@@ -79,7 +72,7 @@ class CustomAlert  {
                                 height: 20)
         alertView.addSubview(setLabel)
         
-      
+        
         
         setsTextField.frame = CGRect(x: 20,
                                      y: setLabel.frame.maxY,
@@ -109,9 +102,9 @@ class CustomAlert  {
         
         
         repsTextField.frame = CGRect(x: 20,
-                               y: repsLabel.frame.maxY,
-                               width: alertView.frame.width - 40,
-                               height: 30)
+                                     y: repsLabel.frame.maxY,
+                                     width: alertView.frame.width - 40,
+                                     height: 30)
         repsTextField.backgroundColor = .specialLightBrown
         repsTextField.borderStyle = .none
         repsTextField.textColor = .specialGrey
@@ -142,7 +135,7 @@ class CustomAlert  {
         buttonAction = completion
         
         UIView.animate(withDuration: 0.3) {
-            self.backgroundView.alpha = 0.8
+            self.backgroundView.alpha = 0.3
         } completion: { done in
             if done {
                 UIView.animate(withDuration: 0.3) {
@@ -151,13 +144,13 @@ class CustomAlert  {
             }
         }
     }
-    
+
     @objc private func dismissAlert() {
         guard let setsNumber = setsTextField.text else { return }
         guard let repsNumber = repsTextField.text else { return }
-        
+
         buttonAction?(setsNumber, repsNumber)
-        
+
         guard let targetView = mainView else { return }
 
         UIView.animate(withDuration: 0.3) {
@@ -172,7 +165,7 @@ class CustomAlert  {
                 } completion: { [weak self] done in
                     guard let self = self else { return }
                     if done {
-                        self.alertView.removeFromSuperview()
+
                         self.backgroundView.removeFromSuperview()
                         self.scrollView.removeFromSuperview()
                         self.removeForKeyBoardNofication()

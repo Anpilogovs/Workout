@@ -1,10 +1,3 @@
-//
-//  UILabel + Extension.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 17.01.2023.
-//
-
 import Foundation
 import UIKit
 

@@ -1,10 +1,3 @@
-//
-//  WorkoutModel.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 18.01.2023.
-//
-
 import RealmSwift
 import Foundation
 

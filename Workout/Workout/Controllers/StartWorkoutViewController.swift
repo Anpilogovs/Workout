@@ -1,14 +1,7 @@
-//
-//  StartWorkoutViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 22.01.2023.
-//
-
 import Foundation
 import UIKit
 
-class StartWorkoutViewController: UIViewController {
+final class StartWorkoutViewController: UIViewController {
     
     let startWorkoutLabel: UILabel = {
         let label = UILabel()
@@ -65,10 +58,10 @@ class StartWorkoutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setDelegate()
         setupViews()
         setupContraints()
         setWorkoutParameters()
-        setDelegate()
     }
     
     private func setupViews() {

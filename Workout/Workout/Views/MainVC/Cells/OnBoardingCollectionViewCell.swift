@@ -1,22 +1,15 @@
-//
-//  OnBoardingCollectionViewCell.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 03.02.2023.
-//
-
 import UIKit
 
-class OnBoardingCollectionViewCell: UICollectionViewCell {
+final class OnBoardingCollectionViewCell: UICollectionViewCell {
     
-    private let backgroundImageView: UIImageView = {
+    private lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    private let topLabel: UILabel = {
+    private lazy var topLabel: UILabel = {
         let label = UILabel()
         label.textColor = .specialGreen
         label.font = .robotoBold24()
@@ -25,7 +18,7 @@ class OnBoardingCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let bottomLabel: UILabel = {
+     private lazy var bottomLabel: UILabel = {
         let label = UILabel()
         label.font = .robotoMedium16()
         label.textColor = .specialGreen

@@ -1,17 +1,9 @@
-//
-//  newWorkout.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 16.01.2023.
-//
-
-import Foundation
 import UIKit
 
 
-class DateAndRepeatView: UIView {
+final class DateAndRepeatView: UIView {
     
-    private let dateLabel: UILabel = {
+    private lazy var dateLabel: UILabel = {
         let label = UILabel()
         label.text = "Date"
         label.font = .robotoMedium18()
@@ -20,7 +12,7 @@ class DateAndRepeatView: UIView {
         return label
     }()
     
-    private let repeatEveryLabel: UILabel = {
+     lazy var repeatEveryLabel: UILabel = {
         let label = UILabel()
         label.text = "Repeat every 7 days"
         label.font = .robotoMedium18()
@@ -37,7 +29,7 @@ class DateAndRepeatView: UIView {
         return datePicker
     }()
     
-     let repeatSwitches: UISwitch = {
+     lazy var repeatSwitches: UISwitch = {
         let switches = UISwitch()
         switches.isOn = true
         switches.tintColor = .specialGreen
@@ -45,8 +37,8 @@ class DateAndRepeatView: UIView {
         return switches
     }()
     
-    var dateStackView = UIStackView()
-    var repeatStackView = UIStackView()
+    private lazy var dateStackView = UIStackView()
+    private lazy var repeatStackView = UIStackView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -74,6 +66,7 @@ class DateAndRepeatView: UIView {
     }
 }
 
+//MARK: - setupContraints
 extension DateAndRepeatView {
     private func setupContraints() {
         

@@ -1,10 +1,3 @@
-//
-//  StatisticViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 17.01.2023.
-//
-
 import Foundation
 import UIKit
 import RealmSwift
@@ -15,7 +8,7 @@ struct DifferenceWorkout {
     let firstReps: Int
 }
 
-class StatisticViewController: UIViewController {
+final class StatisticViewController: UIViewController {
 
     let statisticsLabel: UILabel = {
         let label = UILabel()
@@ -204,6 +197,7 @@ extension StatisticViewController: UITableViewDataSource {
         cell.cellConfigure(diffrenceWorkout: differenceModel)
         return cell
     }
+    
 }
 //MARK: - UITextFieldDelegate
 

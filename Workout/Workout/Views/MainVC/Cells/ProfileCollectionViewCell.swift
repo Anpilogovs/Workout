@@ -1,16 +1,9 @@
-//
-//  ProfileCollectionViewCell.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 30.01.2023.
-//
-
 import UIKit
 import RealmSwift
 
-class ProfileCollectionViewCell: UICollectionViewCell {
+final class ProfileCollectionViewCell: UICollectionViewCell {
     
-    private let nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "PUSH UPS"
         label.textColor = .white
@@ -20,7 +13,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private let workoutImageView: UIImageView = {
+    private lazy var workoutImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "1")?.withRenderingMode(.alwaysTemplate)
         imageView.tintColor = .white
@@ -29,7 +22,7 @@ class ProfileCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private let numberLabel: UILabel = {
+    private lazy var numberLabel: UILabel = {
         let label = UILabel()
         label.text = "180"
         label.textColor = .white

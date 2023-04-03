@@ -1,10 +1,3 @@
-//
-//  CalendarView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import Foundation
 import UIKit
 
@@ -12,9 +5,9 @@ protocol SelectCollectionViewItemProtocol: AnyObject {
     func selectItem(date: Date)
 }
 
-class CalendarView: UIView {
+final class CalendarView: UIView {
     
-   private let collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -22,7 +15,7 @@ class CalendarView: UIView {
         return collectionView
     }()
     
-    private let idCalendarCell = "idCalendarCell"
+    private lazy var idCalendarCell = "idCalendarCell"
     weak var cellCollectionViewDelegate: SelectCollectionViewItemProtocol?
     
     override init(frame: CGRect) {
@@ -50,7 +43,6 @@ class CalendarView: UIView {
         collectionView.dataSource = self
     }
 }
-
 //MARK: - UICollectionViewDataSource
 
 extension CalendarView: UICollectionViewDataSource {

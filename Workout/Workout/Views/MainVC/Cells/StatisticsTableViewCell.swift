@@ -1,17 +1,10 @@
-//
-//  StatisticsTableViewCell.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 29.01.2023.
-//
-
 import UIKit
 import RealmSwift
 
 
-class StatisticsTableViewCell: UITableViewCell {
+final class StatisticsTableViewCell: UITableViewCell {
     
-   private let labelNameWorkout: UILabel = {
+   private lazy var labelNameWorkout: UILabel = {
         let label = UILabel()
         label.text = "Unknown"
         label.font = .robotoMedium20()
@@ -19,10 +12,10 @@ class StatisticsTableViewCell: UITableViewCell {
         return label
     }()
     
-  private  let beforeLabel = UILabel(text: "Before: ")
-  private let nowLabel = UILabel(text: "Now: ")
+  private lazy var beforeLabel = UILabel(text: "Before: ")
+  private lazy var nowLabel = UILabel(text: "Now: ")
     
-   private let numeberLabel: UILabel = {
+   private lazy var numeberLabel: UILabel = {
         let label = UILabel()
         label.text = "0"
         label.font = .robotoMedium20()
@@ -30,7 +23,7 @@ class StatisticsTableViewCell: UITableViewCell {
         return label
     }()
     
-   private let lineView: UIView = {
+   private lazy var lineView: UIView = {
         let view = UIView()
         view.backgroundColor = .specialBrown
         view.translatesAutoresizingMaskIntoConstraints = false

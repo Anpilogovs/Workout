@@ -1,15 +1,9 @@
-//
-//  SettingViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 31.01.2023.
-//
 import Foundation
 import UIKit
 import RealmSwift
 
 
-class SettingViewController: UIViewController {
+final class SettingViewController: UIViewController {
     
     private let editingProfileLabel: UILabel = {
         let label = UILabel()
@@ -147,7 +141,6 @@ class SettingViewController: UIViewController {
     }
     
     private func  loadUserInfo() {
-        
         if userArray.count != 0 {
             firstNameTextField.text = userArray[0].userFirstName
             secondTextField.text = userArray[0].userSecondName
@@ -205,7 +198,7 @@ class SettingViewController: UIViewController {
         }
     }
 }
-
+//MARK: - UIImagePickerControllerDelegate
 extension SettingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
@@ -225,7 +218,7 @@ extension SettingViewController: UIImagePickerControllerDelegate, UINavigationCo
         dismiss(animated: true)
     }
 }
-
+//MARK: - SetupContraints
 extension SettingViewController {
     private func setupContraints() {
         

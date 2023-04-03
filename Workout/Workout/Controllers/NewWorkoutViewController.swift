@@ -1,14 +1,8 @@
 //
-//  NewWorkoutViewController.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 16.01.2023.
-//
-
 import UIKit
 import RealmSwift
 
-class NewWorkoutViewController: UIViewController {
+final class NewWorkoutViewController: UIViewController {
     
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -83,12 +77,10 @@ class NewWorkoutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
         setupConstraints()
         setupDelegate()
         addTaps()
-
     }
     
     @objc func closeScrennButton() {
@@ -191,15 +183,13 @@ class NewWorkoutViewController: UIViewController {
         notifications.scheduleDateNotification(date: workoutModel.workoutDate, id: "workout" + stringDate)
     }
 }
-
 //MARK: - UITextFieldDelegate
-
 extension NewWorkoutViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextField.resignFirstResponder()
     }
 }
-
+//MARK: - SetupConstraints
 extension NewWorkoutViewController {
     
     private func setupConstraints() {

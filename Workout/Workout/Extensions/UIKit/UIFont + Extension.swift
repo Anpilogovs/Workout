@@ -1,10 +1,3 @@
-//
-//  UIFont + Extension.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import Foundation
 import UIKit
 
@@ -25,7 +18,6 @@ extension UIFont {
     static func robotoBold24() -> UIFont? {
         return UIFont.init(name: "Roboto-Medium", size: 20)
     }
-    
     //Medium
     static func robotoMedium24() -> UIFont? {
         return UIFont.init(name: "Roboto-Medium", size: 24)

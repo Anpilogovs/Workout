@@ -1,11 +1,3 @@
-//
-//  TimerStartView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 24.01.2023.
-//
-
-import Foundation
 import UIKit
 import RealmSwift
 
@@ -14,7 +6,7 @@ protocol nextSetForScreenWithTimerProtocol: AnyObject {
     func editingButtonForTimeViewControllerTap()
 }
 
-class TimerStartView: UIView {
+final class TimerStartView: UIView {
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -26,7 +18,6 @@ class TimerStartView: UIView {
         return label
     }()
     
-    
     let setsLabel: UILabel = {
         let label = UILabel()
         label.text = "Sets"
@@ -35,7 +26,6 @@ class TimerStartView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     let setsNumberLabel: UILabel = {
         let label = UILabel()
@@ -46,7 +36,6 @@ class TimerStartView: UIView {
         return label
     }()
     
-    
     let timeOfSetLabel: UILabel = {
         let label = UILabel()
         label.text = "Timer of Set"
@@ -55,7 +44,6 @@ class TimerStartView: UIView {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     let timeOfSetNumberLabel: UILabel = {
         let label = UILabel()
@@ -90,7 +78,7 @@ class TimerStartView: UIView {
         return button
     }()
     
-    let nextSetButton: UIButton = {
+     lazy var nextSetButton: UIButton = {
        let button = UIButton()
         button.setTitle("NEXT SET", for: .normal)
         button.setTitleColor(UIColor.specialBrown, for: .normal)
@@ -98,7 +86,7 @@ class TimerStartView: UIView {
         button.titleLabel?.textAlignment = .center
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(TimerStartView.self, action: #selector(nextSetButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextSetButtonTapped), for: .touchUpInside)
         return button
     }()
     

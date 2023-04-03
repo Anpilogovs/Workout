@@ -1,10 +1,3 @@
-//
-//  RealmManager.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 18.01.2023.
-//
-
 import RealmSwift
 
 class RealmManager {
@@ -39,9 +32,7 @@ class RealmManager {
             localRealm.delete(model)
         }
     }
-    
     //UserModel
-    
     func saveUserModel(model: UserModel) {
         try! localRealm.write {
             localRealm.add(model)

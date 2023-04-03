@@ -1,10 +1,3 @@
-//
-//  AppDelegate.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import UIKit
 import NotificationCenter
 
@@ -19,7 +12,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         notifications.requestAutorization()
         notifications.notificationCenter.delegate = notifications
-//        application.applicationIconBadgeNumber = 0
         
         return true
     }

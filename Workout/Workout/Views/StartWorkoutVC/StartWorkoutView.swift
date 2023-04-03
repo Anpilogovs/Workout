@@ -1,11 +1,3 @@
-//
-//  StartWorkoutView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 22.01.2023.
-//
-
-import Foundation
 import UIKit
 
 protocol NextSetProtocol: AnyObject {
@@ -13,7 +5,7 @@ protocol NextSetProtocol: AnyObject {
     func editingButtonForStarViewControllerTap()
 }
 
-class StartWorkoutView: UIView {
+final class StartWorkoutView: UIView {
     
       let workoutNameLabel: UILabel = {
         let label = UILabel()
@@ -89,7 +81,7 @@ class StartWorkoutView: UIView {
         button.tintColor = .specialDarkGreen
         button.layer.cornerRadius = 10
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(StartWorkoutView.self, action: #selector(nextSetsButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextSetsButtonTapped), for: .touchUpInside)
         return button
     }()
     

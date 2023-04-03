@@ -1,22 +1,15 @@
-//
-//  WeatherView.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import UIKit
 
-class WeatherView: UIView {
+final class WeatherView: UIView {
     
-    let weatherImageView: UIImageView = {
+     lazy var weatherImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "Sun")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    let nameWeatherLabel: UILabel = {
+     lazy var nameWeatherLabel: UILabel = {
         let label = UILabel()
         label.text = "Солнышко"
         label.textColor = .specialGrey
@@ -26,7 +19,7 @@ class WeatherView: UIView {
         return label
     }()
     
-    let descriptionWeatherLabel: UILabel = {
+     lazy var descriptionWeatherLabel: UILabel = {
         let label = UILabel()
         label.textColor = .specialGrey
         label.text = "Хорошоая погода,чтобы позаниматься на улице"

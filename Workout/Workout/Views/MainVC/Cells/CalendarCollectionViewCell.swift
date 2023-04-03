@@ -1,15 +1,8 @@
-//
-//  CalendarCollectionViewCell.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 15.01.2023.
-//
-
 import UIKit
 
-class CalendarCollectionViewCell: UICollectionViewCell {
+final class CalendarCollectionViewCell: UICollectionViewCell {
     
-    private let dayOfWeekLabel: UILabel = {
+  private lazy var dayOfWeekLabel: UILabel = {
         let label = UILabel()
         label.text = "We"
         label.font = .robotoMedium16()
@@ -19,7 +12,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-     let numberOfDayLabel: UILabel = {
+    private lazy var numberOfDayLabel: UILabel = {
         let label = UILabel()
         label.text = "29"
         label.font = .robotoMedium20()
@@ -59,7 +52,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
         addSubview(numberOfDayLabel)
     }
     
-    func cellConfigure(numberOfDay: String, dayOfWeek: String) {
+   public func cellConfigure(numberOfDay: String, dayOfWeek: String) {
         numberOfDayLabel.text = numberOfDay
         dayOfWeekLabel.text = dayOfWeek
     }

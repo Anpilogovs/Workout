@@ -1,10 +1,3 @@
-//
-//  UserModel.swift
-//  Workout
-//
-//  Created by Сергей Анпилогов on 31.01.2023.
-//
-
 import Foundation
 import RealmSwift
 
